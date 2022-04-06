@@ -34,7 +34,7 @@ const Navbar = () => {
     setToggle(false);
   }, [pathname]);
   return (
-    <nav className="bg-white border-gray-200 p-4">
+    <nav className="bg-white border-gray-200 p-4 lg:container lg:mx-auto">
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
