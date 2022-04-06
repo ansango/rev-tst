@@ -1,4 +1,4 @@
-import passport from "@/lib-api/auth";
+import passport from "@/lib-api/auth/passport";
 import { auth, database } from "@/lib-api/middlewares";
 import { options } from "@/lib-api/nc";
 import nc from "next-connect";

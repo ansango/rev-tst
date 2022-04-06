@@ -1,9 +1,6 @@
 import bcrypt from "bcryptjs";
-import { ObjectIdLike } from "bson";
 import { type Db, ObjectId } from "mongodb";
 import { normalizeEmail } from "@/lib-utils/validations";
-
-type objectId = string | number | ObjectId | ObjectIdLike | Buffer | Uint8Array;
 
 const dbProjectionUsers = (prefix = "") => {
   return {
@@ -13,7 +10,7 @@ const dbProjectionUsers = (prefix = "") => {
   };
 };
 
-const findUserForAuth = async (db: Db, userId: objectId) => {
+const findUserForAuth = async (db: Db, userId: string) => {
   return db
     .collection("users")
     .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })

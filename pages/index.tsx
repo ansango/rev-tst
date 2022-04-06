@@ -9,48 +9,6 @@ import Link from "next/link";
 const Home: NextPage = () => {
   const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
 
-  const onSignUp = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        const response = await fetcher("/api/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "anibalsantosgo@gmail.com",
-            name: "Anibal Santos",
-            password: "12345678",
-            username: "ansango",
-          }),
-        });
-        mutate({ user: response.user }, false);
-      } catch (e: any) {
-        console.error(e);
-      }
-    },
-    [mutate]
-  );
-
-  const onSignIn = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        const response = await fetcher("/api/auth", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "anibalsantosgo@gmail.com",
-            password: "12345678",
-          }),
-        });
-        mutate({ user: response.user }, false);
-      } catch (e: any) {
-        console.error(e);
-      }
-    },
-    [mutate]
-  );
-
   const onSignOut = useCallback(async () => {
     try {
       await fetcher("/api/auth", {
@@ -81,22 +39,7 @@ const Home: NextPage = () => {
           <p>{user._id}</p>
         </div>
       )}
-      {!user && (
-        <>
-          <div>
-            <h2>Sign up</h2>
-            <form onSubmit={onSignUp}>
-              <button type="submit">Sign up</button>
-            </form>
-          </div>
-          <div>
-            <h2>Sign in</h2>
-            <form onSubmit={onSignIn}>
-              <button type="submit">Sign in</button>
-            </form>
-          </div>
-        </>
-      )}
+
       {error && <p>{error.message}</p>}
       {user && <button onClick={onSignOut}>Sign out</button>}
       {user && <Link href={`user/${user.username}`}>Profile</Link>}
