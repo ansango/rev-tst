@@ -1,5 +1,6 @@
 import fetcher from "@/lib-client/fetcher";
 import { useCurrentUser } from "@/lib-client/user/hooks";
+import BlankLayout from "components/Components/layout/BlankLayout";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -32,8 +33,8 @@ const SignIn: NextPage = () => {
     [mutate]
   );
   return (
-    <div>
-      <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <BlankLayout>
+      <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
         <form className="space-y-6" onSubmit={onSignIn}>
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Sign in to our platform
@@ -110,7 +111,7 @@ const SignIn: NextPage = () => {
           </div>
         </form>
       </div>
-    </div>
+    </BlankLayout>
   );
 };
 

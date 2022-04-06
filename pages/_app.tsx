@@ -6,11 +6,11 @@ import Footer from "components/Components/common/Footer/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div className="flex flex-col justify-between h-screen">
       <Navbar />
       <Component {...pageProps} />
       <Footer />
-    </>
+    </div>
   );
 }
 
