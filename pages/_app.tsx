@@ -1,16 +1,12 @@
 import "../styles/globals.css";
-
 import type { AppProps } from "next/app";
-import Navbar from "components/Components/common/Navbar/Navbar";
-import Footer from "components/Components/common/Footer/Footer";
+import WrapperLayout from "components/layout/WrapperLayout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
-    <div className="flex flex-col justify-between h-screen">
-      <Navbar />
+    <WrapperLayout>
       <Component {...pageProps} />
-      <Footer />
-    </div>
+    </WrapperLayout>
   );
 }
 

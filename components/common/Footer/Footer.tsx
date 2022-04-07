@@ -1,67 +1,11 @@
 import Link from "next/link";
-import IconSimple from "../Icons/IconSimple/IconSimple";
 import Logo from "../Logo/Logo";
-
-const mainRoutes = [
-  {
-    name: "Inicio",
-    path: "/",
-  },
-  {
-    name: "Recetas",
-    path: "/recipes",
-  },
-  {
-    name: "Categorías",
-    path: "/categories",
-  },
-  {
-    name: "Trending",
-    path: "/trending",
-  },
-  {
-    name: "Robousers",
-    path: "/robousers",
-  },
-];
-
-const legalRoutes = [
-  {
-    name: "Política de privacidad",
-    path: "/privacy",
-  },
-  {
-    name: "Términos y condiciones",
-    path: "/terms",
-  },
-  {
-    name: "Cookies",
-    path: "/cookies",
-  },
-];
-
-const SocialIcons = () => {
-  return (
-    <div className="flex space-x-6 text-gray-900">
-      <a href="https://facebook.com/" target="_blank" rel="noreferrer">
-        <IconSimple icon="Facebook" classIcon="w-5 h-5" />
-      </a>
-      <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-        <IconSimple icon="Twitter" classIcon="w-5 h-5" />
-      </a>
-      <a href="https://instagram.com/" target="_blank" rel="noreferrer">
-        <IconSimple icon="Instagram" classIcon="w-5 h-5" />
-      </a>
-      <a href="https://youtube.com/" target="_blank" rel="noreferrer">
-        <IconSimple icon="Youtube" classIcon="w-5 h-5" />
-      </a>
-    </div>
-  );
-};
+import { legalRoutes, mainRoutes } from "./routes";
+import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   return (
-    <footer className="p-4 bg-white text-gray-600 space-y-12 lg:container mx-auto">
+    <footer className="p-4 bg-white text-gray-600 space-y-12 lg:container mx-auto text-sm">
       <div className="space-y-12 grid md:grid-cols-3 md:gap-6">
         <div className="space-y-6">
           <Link href="/">
@@ -82,7 +26,7 @@ const Footer = () => {
               {mainRoutes.map(({ name, path }) => (
                 <li key={path}>
                   <Link href={path}>
-                    <a>{name}</a>
+                    <a className="hover:underline">{name}</a>
                   </Link>
                 </li>
               ))}
@@ -94,7 +38,7 @@ const Footer = () => {
               {legalRoutes.map(({ name, path }) => (
                 <li key={path}>
                   <Link href={path}>
-                    <a>{name}</a>
+                    <a className="hover:underline">{name}</a>
                   </Link>
                 </li>
               ))}
@@ -105,12 +49,12 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <Link href="/contact">
-                  <a>Contacto</a>
+                  <a className="hover:underline">Contacto</a>
                 </Link>
               </li>
               <li>
                 <Link href="/sponsors">
-                  <a>Patrocinadores</a>
+                  <a className="hover:underline">Patrocinadores</a>
                 </Link>
               </li>
             </ul>

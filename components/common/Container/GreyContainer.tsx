@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const BlankLayout: FC = ({ children }) => {
+const GreyContainer: FC = ({ children }) => {
   return (
     <div className="bg-gray-50 h-screen">
       <main className="container m-auto h-full w-full">
@@ -12,4 +12,4 @@ const BlankLayout: FC = ({ children }) => {
   );
 };
 
-export default BlankLayout;
+export default GreyContainer;

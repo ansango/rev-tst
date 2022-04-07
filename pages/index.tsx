@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useCurrentUser } from "@/lib-client/user/hooks";
 import fetcher from "@/lib-client/fetcher";
 import Link from "next/link";
-import ContentLayout from "components/Components/layout/ContentLayout";
+import BlockContainer from "components/common/Container/BlockContainer";
 
 const Home: NextPage = () => {
   const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }, [mutate]);
 
   return (
-    <ContentLayout>
+    <BlockContainer>
       {user && (
         <div>
           <p>{user.name}</p>
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       {error && <p>{error.message}</p>}
       {user && <button onClick={onSignOut}>Sign out</button>}
       {user && <Link href={`user/${user.username}`}>Profile</Link>}
-    </ContentLayout>
+    </BlockContainer>
   );
 };
 

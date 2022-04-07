@@ -1,6 +1,6 @@
 import fetcher from "@/lib-client/fetcher";
 import { useCurrentUser } from "@/lib-client/user/hooks";
-import BlankLayout from "components/Components/layout/BlankLayout";
+import GreyContainer from "components/common/Container/GreyContainer";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -35,7 +35,7 @@ const SignUp: NextPage = () => {
     [mutate]
   );
   return (
-    <BlankLayout>
+    <GreyContainer>
       <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
         <form className="space-y-6" onSubmit={onSignUp}>
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
@@ -118,7 +118,7 @@ const SignUp: NextPage = () => {
           </div>
         </form>
       </div>
-    </BlankLayout>
+    </GreyContainer>
   );
 };
 
