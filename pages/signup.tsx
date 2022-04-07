@@ -11,7 +11,7 @@ const SignUp: NextPage = () => {
   const { replace } = useRouter();
   useEffect(() => {
     if (isValidating) return;
-    if (user) replace(`/user/${user.username}`);
+    if (user) replace(`/user/settings/${user.username}`);
   }, [user, replace, isValidating]);
   const onSignUp = useCallback(
     async (e) => {

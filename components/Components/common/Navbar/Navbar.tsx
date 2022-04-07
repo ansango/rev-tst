@@ -3,9 +3,127 @@ import ButtonIcon from "../Buttons/ButtonIcon/ButtonIcon";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "@/lib-client/user/hooks";
 import Icon from "../Icons/Icon/Icon";
-import { useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import Logo from "../Logo/Logo";
+import { usePopper } from "react-popper";
+import fetcher from "@/lib-client/fetcher";
+
+const User: FC = () => {
+  const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
+  const [showPopper, setShowPopper] = useState(false);
+  const buttonRef = useRef(null);
+  const popperRef = useRef(null);
+  const { replace } = useRouter();
+  const { styles, attributes } = usePopper(
+    buttonRef.current,
+    popperRef.current,
+    {
+      modifiers: [
+        {
+          name: "offset",
+          options: {
+            offset: [0, 10],
+          },
+        },
+      ],
+    }
+  );
+  useEffect(() => {
+    document.addEventListener("click", clickOut);
+    return () => {
+      document.removeEventListener("click", clickOut);
+    };
+  }, []);
+
+  const clickOut = (event: any) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+
+    if (!path.includes(buttonRef.current)) {
+      setShowPopper(false);
+    }
+  };
+
+  const onSignOut = useCallback(async () => {
+    try {
+      await fetcher("/api/auth", {
+        method: "DELETE",
+      });
+      mutate({ user: null });
+      replace("/");
+    } catch (e) {
+      console.error(e);
+    }
+  }, [mutate, replace]);
+
+  return (
+    <div className="relative">
+      <div
+        ref={buttonRef}
+        onClick={() => setShowPopper(!showPopper)}
+        className="cursor-pointer"
+      >
+        <Avatar
+          size="xsmall"
+          imgUrl="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        />
+      </div>
+      {showPopper ? (
+        <div
+          ref={popperRef}
+          className={`absolute z-10 mt-2 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0`}
+          style={styles}
+          {...attributes.popper}
+        >
+          <div className="py-3 px-4 text-gray-900 dark:text-white">
+            <span className="block text-sm">{user?.name}</span>
+            <span className="block text-sm font-medium truncate">
+              {user?.email}
+            </span>
+          </div>
+          <ul className="py-1 my-1">
+            <li>
+              <Link href={`/user/settings/${user?.username}`}>
+                <a className="block py-2 px-4 text-sm text-gray-500 hover:bg-gray-100 cursor-pointer">
+                  Ajustes
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/user/collections">
+                <a className="block py-2 px-4 text-sm text-gray-500 hover:bg-gray-100 cursor-pointer">
+                  Colecciones
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/user/favorites">
+                <a className="block py-2 px-4 text-sm text-gray-500 hover:bg-gray-100 cursor-pointer">
+                  Favoritos
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/user/messages">
+                <a className="block py-2 px-4 text-sm text-gray-500 hover:bg-gray-100 cursor-pointer">
+                  Mensajes
+                </a>
+              </Link>
+            </li>
+          </ul>
+          <div className="py-1">
+            <a
+              className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+              onClick={onSignOut}
+            >
+              Cerrar Sesión
+            </a>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 const rActive = (pathname: string, href: string) => {
   return pathname === href ? true : false;
@@ -87,10 +205,7 @@ const Navbar = () => {
                 />
               </li>
               <li className="p-2 flex">
-                <Avatar
-                  size="xsmall"
-                  imgUrl="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                />
+                <User />
               </li>
             </>
           )}
