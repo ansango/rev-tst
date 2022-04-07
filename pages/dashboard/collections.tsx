@@ -1,9 +1,8 @@
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-const collections = () => {
-  return (
-    <div>collections</div>
-  )
-}
+const Collections: NextPage = () => {
+  return <div>collections</div>;
+};
 
-export default collections
+export default Collections;

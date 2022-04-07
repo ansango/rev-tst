@@ -1,9 +1,8 @@
+import { NextPage } from 'next';
 import React from 'react'
 
-const messages = () => {
-  return (
-    <div>messages</div>
-  )
-}
+const Messages: NextPage = () => {
+  return <div>messages</div>;
+};
 
-export default messages
+export default Messages

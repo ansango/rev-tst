@@ -80,7 +80,7 @@ const User: FC = () => {
           </div>
           <ul className="py-1 my-1">
             <li>
-              <Link href={`/dashboard/settings/${user?.username}`}>
+              <Link href="/dashboard/settings/">
                 <a className="block py-2 px-4 text-sm text-gray-500 hover:bg-gray-100 cursor-pointer">
                   Ajustes
                 </a>

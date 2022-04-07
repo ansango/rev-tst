@@ -1,9 +1,18 @@
+import { useCurrentUser } from "@/lib-client/user/hooks";
 import Footer from "components/dashboard/Footer/Footer";
 import Navbar from "components/dashboard/Navbar/Navbar";
 import Sidebar from "components/dashboard/Sidebar/Sidebar";
-import React, { FC } from "react";
+import { useRouter } from "next/router";
+import React, { FC, useEffect } from "react";
 
 const DashboardLayout: FC = ({ children }) => {
+  const { data: { user } = {}, mutate, isValidating } = useCurrentUser();
+  const { replace } = useRouter();
+  useEffect(() => {
+    if (isValidating) return;
+    if (!user) replace("/signin");
+  }, [user, replace, isValidating]);
+  if (!user) return null;
   return (
     <div className="flex flex-col justify-between h-screen bg-gray-100">
       <Navbar />

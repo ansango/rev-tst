@@ -1,9 +1,8 @@
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-const favorites = () => {
-  return (
-    <div>favorites</div>
-  )
-}
+const Favorites: NextPage = () => {
+  return <div>favorites</div>;
+};
 
-export default favorites
+export default Favorites;
