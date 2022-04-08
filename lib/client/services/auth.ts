@@ -29,4 +29,38 @@ const onSignInService = async ({
   }
 };
 
-export { onSignInService, type onSignInDataService };
+type onSignUpDataService = {
+  email: string;
+  password: string;
+  username: string;
+};
+
+const onSignUpService = async ({
+  email,
+  password,
+  username,
+}: onSignUpDataService): Promise<User> => {
+  try {
+    const response = await fetcher("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+        username,
+      }),
+    });
+    toast.success(responseService.sigUp);
+    return response.user;
+  } catch (err: any) {
+    toast.error(errorService[err.error] || errorService.default);
+    throw err;
+  }
+};
+
+export {
+  onSignInService,
+  type onSignInDataService,
+  onSignUpService,
+  type onSignUpDataService,
+};

@@ -30,17 +30,18 @@ const validateBody = (schema: Schema) => {
   };
 };
 
+// TODO: return a promise with objects
+
 const signUpValidation = () => {
-  const { username, name, password, email } = UserSchema;
+  const { username, password, email } = UserSchema;
   return validateBody({
     type: "object",
     properties: {
       username,
-      name,
       password,
       email,
     },
-    required: ["username", "name", "password", "email"],
+    required: ["username", "password", "email"],
     additionalProperties: false,
   });
 };

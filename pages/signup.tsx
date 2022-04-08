@@ -1,4 +1,7 @@
-import fetcher from "@/lib-client/fetcher";
+import {
+  onSignUpDataService,
+  onSignUpService,
+} from "@/lib-client/services/auth";
 import { useCurrentUser } from "@/lib-client/user/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
@@ -16,22 +19,12 @@ const SignUp: NextPage = () => {
     if (user) replace(`/user/settings/${user.username}`);
   }, [user, replace, isValidating]);
   const onSignUp = useCallback(
-    async (e) => {
-      e.preventDefault();
+    async ({ username, email, password }: onSignUpDataService) => {
       try {
-        const response = await fetcher("/api/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "anibalsantosgo@gmail.com",
-            name: "Anibal Santos",
-            password: "12345678",
-            username: "ansango",
-          }),
-        });
-        mutate({ user: response.user }, false);
-      } catch (e: any) {
-        console.error(e);
+        const response = await onSignUpService({ username, email, password });
+        mutate({ user: response }, false);
+      } catch (e) {
+        console.log(e);
       }
     },
     [mutate]
@@ -39,7 +32,7 @@ const SignUp: NextPage = () => {
   return (
     <GreyContainer>
       <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
-        <Form onSubmit={(data) => console.log(data)}>
+        <Form onSubmit={onSignUp}>
           <div className="space-y-5">
             <h5 className="text-xl font-medium text-gray-900 dark:text-white">
               Crea una cuenta

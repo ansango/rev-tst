@@ -62,14 +62,14 @@ const insertUser = async (
     email,
     originalPassword,
     bio = "",
-    name,
+    name = "",
     profilePicture,
     username,
   }: {
     email: string;
     originalPassword: string;
     bio?: string;
-    name: string;
+    name?: string;
     profilePicture?: string;
     username: string;
   }

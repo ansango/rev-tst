@@ -15,7 +15,7 @@ import { useCallback, useEffect } from "react";
 const SignIn: NextPage = () => {
   const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
   const router = useRouter();
-  
+
   useEffect(() => {
     if (isValidating) return;
     if (user) router.replace("/dashboard/settings/");
@@ -26,8 +26,8 @@ const SignIn: NextPage = () => {
       try {
         const response = await onSignInService({ email, password });
         mutate({ user: response }, false);
-      } catch (e: any) {
-        console.error(e);
+      } catch (e) {
+        console.log(e);
       }
     },
     [mutate]

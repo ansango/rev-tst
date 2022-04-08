@@ -13,7 +13,7 @@ const handler = nc();
 handler.use(database);
 
 handler.post(signUpValidation(), ...auth, async (req, res) => {
-  let { username, name, email, password } = req.body;
+  let { username, email, password } = req.body;
   username = slug(req.body.username);
   email = normalizeEmail(req.body.email);
   if (!isEmail(email)) {
@@ -38,7 +38,6 @@ handler.post(signUpValidation(), ...auth, async (req, res) => {
     email,
     originalPassword: password,
     bio: "",
-    name,
     username,
   });
   req.logIn(user, (err: any) => {
