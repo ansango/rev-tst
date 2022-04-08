@@ -1,15 +1,9 @@
 import fetcher from "@/lib-client/fetcher";
+import { User } from "models/user";
 import useSWR from "swr";
 
 type Data = {
-  user: {
-    _id: string;
-    username: string;
-    name: string;
-    bio: string;
-    email: string;
-    profilePicture: string;
-  } | null;
+  user: User | null;
 };
 
 const useCurrentUser = () => useSWR<Data>("/api/user", fetcher);

@@ -1,6 +1,12 @@
-import fetcher from "@/lib-client/fetcher";
+import {
+  onSignInService,
+  onSignInDataService,
+} from "@/lib-client/services/auth";
+
 import { useCurrentUser } from "@/lib-client/user/hooks";
+import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
+import { Form, Input } from "components/common/Forms";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,18 +20,10 @@ const SignIn: NextPage = () => {
     if (user) router.replace("/dashboard/settings/");
   }, [user, router, isValidating]);
   const onSignIn = useCallback(
-    async (e) => {
-      e.preventDefault();
+    async ({ email, password }: onSignInDataService) => {
       try {
-        const response = await fetcher("/api/auth", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "anibalsantosgo@gmail.com",
-            password: "12345678",
-          }),
-        });
-        mutate({ user: response.user }, false);
+        const response = await onSignInService({ email, password });
+        mutate({ user: response }, false);
       } catch (e: any) {
         console.error(e);
       }
@@ -35,81 +33,49 @@ const SignIn: NextPage = () => {
   return (
     <GreyContainer>
       <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
-        <form className="space-y-6" onSubmit={onSignIn}>
-          <h5 className="text-xl font-medium text-gray-900 dark:text-white">
-            Sign in to our platform
-          </h5>
-          <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Your email
-            </label>
-            <input
-              type="email"
+        <Form onSubmit={onSignIn}>
+          <div className="space-y-5">
+            <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+              Inicia sesión
+            </h5>
+            <Input
               name="email"
-              id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="name@company.com"
+              label="Tu correo"
+              type="email"
+              options={{
+                required: { value: true, message: "Introduce un email" },
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Introduce un email valido",
+                },
+              }}
             />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
+            <Input
               name="password"
-              id="password"
-              placeholder="••••••••"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              label="Contraseña"
+              type="password"
+              options={{
+                required: { value: true, message: "Introduce tu contraseña" },
+              }}
             />
+            <p>
+              <Link href="/signup">
+                <a className="text-blue-700 hover:underline dark:text-blue-500 text-sm">
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </Link>
+            </p>
+            <Button label="Iniciar sesión" fullWidth type="submit" />
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
+              ¿No tienes cuenta?
+              <Link href="/signup">
+                <a className="text-blue-700 hover:underline dark:text-blue-500 ml-1">
+                  Crear cuenta
+                </a>
+              </Link>
+            </p>
           </div>
-          <div className="flex items-start">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  aria-describedby="remember"
-                  type="checkbox"
-                  className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor="remember"
-                  className="font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <a
-              href="#"
-              className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-            >
-              Lost Password?
-            </a>
-          </div>
-          <button
-            type="submit"
-            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Login to your account
-          </button>
-          <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered?{" "}
-            <Link href="/signup">
-              <a className="text-blue-700 hover:underline dark:text-blue-500">
-                Create account
-              </a>
-            </Link>
-          </div>
-        </form>
+        </Form>
       </div>
     </GreyContainer>
   );
