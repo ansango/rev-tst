@@ -1,10 +1,13 @@
 import { User } from "models/user";
 import fetcher from "../fetcher";
+import toast from "react-hot-toast";
+import { errorService, responseService } from "lib/constants/services";
 
 type onSignInDataService = {
   email: string;
   password: string;
 };
+
 const onSignInService = async ({
   email,
   password,
@@ -18,9 +21,11 @@ const onSignInService = async ({
         password,
       }),
     });
+    toast.success(responseService.sigIn);
     return response.user;
-  } catch (error) {
-    throw error;
+  } catch (err: any) {
+    toast.error(errorService[err.error] || errorService.default);
+    throw err;
   }
 };
 

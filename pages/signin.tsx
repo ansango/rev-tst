@@ -15,10 +15,12 @@ import { useCallback, useEffect } from "react";
 const SignIn: NextPage = () => {
   const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
   const router = useRouter();
+  
   useEffect(() => {
     if (isValidating) return;
     if (user) router.replace("/dashboard/settings/");
   }, [user, router, isValidating]);
+
   const onSignIn = useCallback(
     async ({ email, password }: onSignInDataService) => {
       try {
