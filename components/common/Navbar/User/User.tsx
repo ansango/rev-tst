@@ -1,4 +1,5 @@
 import fetcher from "@/lib-client/fetcher";
+import { onSignOutService } from "@/lib-client/services/auth";
 import { useCurrentUser } from "@/lib-client/user/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,7 +9,7 @@ import Avatar from "../../Avatar/Avatar";
 
 const User: FC = () => {
   const { data: { user } = {}, mutate } = useCurrentUser();
-  console.log(user);
+
   const [showPopper, setShowPopper] = useState(false);
   const buttonRef = useRef(null);
   const popperRef = useRef(null);
@@ -44,9 +45,7 @@ const User: FC = () => {
 
   const onSignOut = useCallback(async () => {
     try {
-      await fetcher("/api/auth", {
-        method: "DELETE",
-      });
+      await onSignOutService();
       mutate({ user: null });
       replace("/");
     } catch (e) {

@@ -58,6 +58,10 @@ const SignUp: NextPage = () => {
                   value: true,
                   message: "Introduce un nombre de usuario",
                 },
+                minLength: {
+                  value: 4,
+                  message: "El nombre de usuario debe tener al menos 4 caracteres",
+                },
               }}
             />
             <Input

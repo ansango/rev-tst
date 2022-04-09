@@ -1,7 +1,7 @@
-import { User } from "models/user";
 import fetcher from "../fetcher";
 import toast from "react-hot-toast";
 import { errorAuthService, responseService } from "lib/constants/services";
+import { User } from "models/user/user";
 
 type onSignInDataService = {
   email: string;
@@ -13,7 +13,7 @@ const onSignInService = async ({
   password,
 }: onSignInDataService): Promise<User> => {
   try {
-    const response = await fetcher("/api/auth", {
+    const response = await fetcher("/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,7 +41,7 @@ const onSignUpService = async ({
   username,
 }: onSignUpDataService): Promise<User> => {
   try {
-    const response = await fetcher("/api/users", {
+    const response = await fetcher("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -58,9 +58,20 @@ const onSignUpService = async ({
   }
 };
 
+const onSignOutService = async (): Promise<void> => {
+  try {
+    await fetcher("/api/auth/signout", {
+      method: "DELETE",
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
 export {
   onSignInService,
   type onSignInDataService,
   onSignUpService,
   type onSignUpDataService,
+  onSignOutService,
 };
