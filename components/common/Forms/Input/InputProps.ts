@@ -6,6 +6,7 @@ export type InputProps = {
   name: string;
   options?: RegisterOptions;
   register?: any;
+  value?: any;
 };
 
 export default InputProps;

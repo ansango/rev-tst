@@ -18,7 +18,7 @@ type Email = string;
 type Url = string;
 type Password = string;
 type Phone = string;
-type Birthday = Date;
+type Birthday = string;
 
 type Company = string;
 type City = string;
