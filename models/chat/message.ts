@@ -1,4 +1,5 @@
 type Message = {
+  _id: MessageId;
   chatId: ChatId;
   sender: UserId;
   content: Content;

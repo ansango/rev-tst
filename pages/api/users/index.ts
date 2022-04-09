@@ -37,7 +37,6 @@ handler.post(signUpValidation(), ...auth, async (req, res) => {
   const user = await insertUser(req.db, {
     email,
     originalPassword: password,
-    bio: "",
     username,
   });
   req.logIn(user, (err: any) => {

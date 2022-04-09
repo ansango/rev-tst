@@ -23,12 +23,30 @@ const createIndexes = async (db: Db) => {
     db
       .collection("tokens")
       .createIndex({ expireAt: -1 }, { expireAfterSeconds: 0 }),
+    db.collection("blenders").createIndex({ name: 1 }, { unique: true }),
     db
-      .collection("posts")
-      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      .collection("recipes")
+      .createIndexes([{ key: { created: -1 } }, { key: { userId: -1 } }]),
+    db.collection("collections").createIndex({ userId: -1 }),
     db
       .collection("comments")
-      .createIndexes([{ key: { createdAt: -1 } }, { key: { postId: -1 } }]),
+      .createIndexes([{ key: { created: -1 } }, { key: { recipeId: -1 } }]),
+    db
+      .collection("chat")
+      .createIndexes([
+        { key: { created: -1 } },
+        { key: { members: -1 } },
+        { key: { messages: -1 } },
+      ]),
+
+    db
+      .collection("messages")
+      .createIndexes([
+        { key: { created: -1 } },
+        { key: { chatId: -1 } },
+        { key: { userId: -1 } },
+      ]),
+
     db.collection("users").createIndexes([
       { key: { email: 1 }, unique: true },
       { key: { username: 1 }, unique: true },

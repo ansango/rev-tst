@@ -1,12 +1,11 @@
-type UserId = string;
-type ChatId = string;
-type RecipeId = string;
-type BlenderId = string;
-type CategoryId = string;
-type CommentId = string;
-type CollectionId = string;
-type AccountId = string;
-type MessageId = string;
+type UserId = ObjectId | string;
+type ChatId = ObjectId | string;
+type RecipeId = ObjectId | string;
+type BlenderId = ObjectId | string;
+type CategoryId = ObjectId | string;
+type CommentId = ObjectId | string;
+type CollectionId = ObjectId | string;
+type MessageId = ObjectId | string;
 
 type Name = string;
 type Content = string;

@@ -13,6 +13,7 @@ type Recipe = {
   steps: Step[];
   likes: UserId[];
   comments: CommentId[];
+  created: Date;
 };
 
 type Step = {

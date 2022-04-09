@@ -30,8 +30,6 @@ const validateBody = (schema: Schema) => {
   };
 };
 
-// TODO: return a promise with objects
-
 const signUpValidation = () => {
   const { username, password, email } = UserSchema;
   return validateBody({

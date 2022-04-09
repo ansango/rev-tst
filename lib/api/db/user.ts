@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { type Db, ObjectId } from "mongodb";
 import { normalizeEmail } from "@/lib-utils/validations";
+import { Account, User } from "models/user/user";
 
 const dbProjectionUsers = (prefix = "") => {
   return {
@@ -61,33 +62,49 @@ const insertUser = async (
   {
     email,
     originalPassword,
-    bio = "",
-    name = "",
-    profilePicture,
     username,
   }: {
     email: string;
     originalPassword: string;
-    bio?: string;
-    name?: string;
-    profilePicture?: string;
     username: string;
   }
 ) => {
-  const user = {
-    emailVerified: false,
-    profilePicture,
-    email,
-    name,
-    username,
-    bio,
-  };
   const password = await bcrypt.hash(originalPassword, 10);
-  const { insertedId } = await db
-    .collection("users")
-    .insertOne({ ...user, password });
+  const account: Account = {
+    about: "",
+    avatar: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    birthday: null,
+    address: {
+      address: "",
+      city: "",
+      country: "",
+      zip: "",
+    },
+    blenders: [],
+  };
+  const user: User = {
+    _id: new ObjectId(),
+    username,
+    email,
+    emailVerified: false,
+    password,
+    account,
+    recipes: [],
+    collections: [],
+    favorites: [],
+    chat: [],
+    followers: [],
+    following: [],
+    preferences: [],
+    created: new Date(),
+  };
 
-  return { ...user, _id: insertedId };
+  await db.collection("users").insertOne({ ...user });
+
+  return { ...user };
 };
 
 export {

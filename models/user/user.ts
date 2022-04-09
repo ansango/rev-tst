@@ -7,15 +7,37 @@ type Follower = {
 
 type User = {
   _id: UserId;
-  account: AccountId;
+  email: Email;
+  emailVerified: boolean;
+  username: Username;
+  password: Password;
+  account: Account;
   recipes: RecipeId[];
   collections: CollectionId[];
   favorites: RecipeId[];
   chat: Chat[];
   followers: Follower[];
   following: Follower[];
-  preferences: CategoryId;
+  preferences: CategoryId[];
   created: Date;
 };
 
-export { type User };
+type Account = {
+  about: Content;
+  avatar: Url;
+  firstName: FirstName;
+  lastName: LastName;
+  phone: Phone;
+  birthday: Birthday | null;
+  address: Address;
+  blenders: BlenderId[];
+};
+
+type Address = {
+  address: string;
+  city: City;
+  country: Country;
+  zip: Zip;
+};
+
+export { type User, type Account, type Address, type Follower };
