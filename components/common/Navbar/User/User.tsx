@@ -7,7 +7,8 @@ import { usePopper } from "react-popper";
 import Avatar from "../../Avatar/Avatar";
 
 const User: FC = () => {
-  const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
+  const { data: { user } = {}, mutate } = useCurrentUser();
+  console.log(user);
   const [showPopper, setShowPopper] = useState(false);
   const buttonRef = useRef(null);
   const popperRef = useRef(null);
@@ -68,12 +69,14 @@ const User: FC = () => {
       {showPopper ? (
         <div
           ref={popperRef}
-          className={`absolute z-10 mt-2 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 right-0`}
+          className={`absolute z-10 mt-2 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow right-0`}
           style={styles}
           {...attributes.popper}
         >
-          <div className="py-3 px-4 text-gray-900 dark:text-white">
-            <span className="block text-sm">{user?.name}</span>
+          <div className="py-3 px-4 text-gray-900">
+            <span className="block text-sm">
+              {user?.name ?? user?.username}
+            </span>
             <span className="block text-sm font-medium truncate">
               {user?.email}
             </span>
