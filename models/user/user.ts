@@ -11,18 +11,12 @@ type User = {
   emailVerified: boolean;
   username: Username;
   password: Password;
-  account: Account;
-  recipes: RecipeId[];
-  collections: CollectionId[];
-  favorites: RecipeId[];
-  chat: Chat[];
-  followers: Follower[];
-  following: Follower[];
-  preferences: CategoryId[];
+  account: AccountId;
   created: Date;
 };
 
 type Account = {
+  _id: AccountId;
   about: Content;
   avatar: Url | null;
   firstName: FirstName;
@@ -30,7 +24,13 @@ type Account = {
   phone: Phone;
   birthday: Birthday | null;
   address: Address;
-  blenders: BlenderId[];
+  recipes: RecipeId[];
+  collections: CollectionId[];
+  favorites: RecipeId[];
+  chat: Chat[];
+  followers: Follower[];
+  following: Follower[];
+  preferences: CategoryId[] | BlenderId[];
 };
 
 type Address = {

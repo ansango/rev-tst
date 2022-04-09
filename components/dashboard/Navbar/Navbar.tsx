@@ -1,4 +1,3 @@
-import { useCurrentUser } from "@/lib-client/user/hooks";
 import ButtonIcon from "components/common/Button/ButtonIcon/ButtonIcon";
 import Logo from "components/common/Logo/Logo";
 import NavDesktop from "components/common/Navbar/NavDesktop";
@@ -8,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import AddRecipe from "components/common/Navbar/AddRecipe";
 import { useEffect, useState } from "react";
+import { useCurrentUser } from "@/lib-client/hooks/user";
 
 const Navbar = () => {
   const { pathname } = useRouter();

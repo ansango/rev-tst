@@ -1,4 +1,5 @@
 type UserId = ObjectId | string;
+type AccountId = ObjectId | string;
 type ChatId = ObjectId | string;
 type RecipeId = ObjectId | string;
 type BlenderId = ObjectId | string;

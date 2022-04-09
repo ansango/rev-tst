@@ -2,7 +2,7 @@ import {
   onSignUpDataService,
   onSignUpService,
 } from "@/lib-client/services/auth";
-import { useCurrentUser } from "@/lib-client/user/hooks";
+import { useCurrentUser } from "@/lib-client/hooks/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";

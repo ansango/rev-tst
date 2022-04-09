@@ -1,6 +1,6 @@
 import fetcher from "@/lib-client/fetcher";
+import { useCurrentUser } from "@/lib-client/hooks/user";
 import { onSignOutService } from "@/lib-client/services/auth";
-import { useCurrentUser } from "@/lib-client/user/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useCallback, useEffect, useRef, useState } from "react";

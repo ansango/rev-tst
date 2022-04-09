@@ -1,4 +1,4 @@
-import { useCurrentUser } from "@/lib-client/user/hooks";
+import { useCurrentUser } from "@/lib-client/hooks/user";
 import { NextPage } from "next";
 import React from "react";
 

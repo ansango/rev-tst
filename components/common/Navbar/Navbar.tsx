@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ButtonIcon from "../Button/ButtonIcon/ButtonIcon";
 import { useRouter } from "next/router";
-import { useCurrentUser } from "@/lib-client/user/hooks";
 import { useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import NavMobile from "./NavMobile";
@@ -9,6 +8,7 @@ import SignIn from "./SignIn";
 import AddRecipe from "./AddRecipe";
 import NavDesktop from "./NavDesktop";
 import User from "./User/User";
+import { useCurrentUser } from "@/lib-client/hooks/user";
 
 const Navbar = () => {
   const { pathname } = useRouter();

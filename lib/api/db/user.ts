@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { type Db, ObjectId } from "mongodb";
 import { normalizeEmail } from "@/lib-utils/validations";
-import { Account, User } from "models/user/user";
+import { Account, Address, User } from "models/user/user";
 
 const dbProjectionUsers = (prefix = "") => {
   return {
@@ -9,13 +9,6 @@ const dbProjectionUsers = (prefix = "") => {
     [`${prefix}email`]: 0,
     [`${prefix}emailVerified`]: 0,
   };
-};
-
-const findUserForAuth = async (db: Db, userId: string) => {
-  return db
-    .collection("users")
-    .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
-    .then((user) => user || null);
 };
 
 const findUserWithEmailAndPassword = async (
@@ -31,6 +24,13 @@ const findUserWithEmailAndPassword = async (
     return { ...user, password: undefined }; // filtered out password
   }
   return null;
+};
+
+const findUserForAuth = async (db: Db, userId: string) => {
+  return db
+    .collection("users")
+    .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
+    .then((user) => user || null);
 };
 
 const findUserById = async (db: Db, userId: string) => {
@@ -70,28 +70,23 @@ const insertUser = async (
   }
 ) => {
   const password = await bcrypt.hash(originalPassword, 10);
+
+  const address: Address = {
+    address: "",
+    city: "",
+    country: "",
+    zip: "",
+  };
+
   const account: Account = {
+    _id: new ObjectId(),
     about: "",
     avatar: "",
     firstName: "",
     lastName: "",
     phone: "",
     birthday: null,
-    address: {
-      address: "",
-      city: "",
-      country: "",
-      zip: "",
-    },
-    blenders: [],
-  };
-  const user: User = {
-    _id: new ObjectId(),
-    username,
-    email,
-    emailVerified: false,
-    password,
-    account,
+    address,
     recipes: [],
     collections: [],
     favorites: [],
@@ -99,6 +94,17 @@ const insertUser = async (
     followers: [],
     following: [],
     preferences: [],
+  };
+  await db.collection("accounts").insertOne({ ...account });
+
+  const user: User = {
+    _id: new ObjectId(),
+    account: account._id,
+    username,
+    email,
+    emailVerified: false,
+    password,
+
     created: new Date(),
   };
 
@@ -108,8 +114,8 @@ const insertUser = async (
 };
 
 export {
-  findUserForAuth,
   findUserWithEmailAndPassword,
+  findUserForAuth,
   findUserById,
   findUserByUsername,
   findUserByEmail,

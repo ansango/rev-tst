@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import { UserSchema } from ".";
+import { AccountSchema, UserSchema } from ".";
 
 type Schema = {
   type: "object";
@@ -10,7 +10,7 @@ type Schema = {
       maxLength?: number;
     };
   };
-  required: string[];
+  required?: string[];
   additionalProperties: boolean;
 };
 
@@ -45,17 +45,31 @@ const signUpValidation = () => {
 };
 
 const updateUserValidation = () => {
-  const { username, name, bio } = UserSchema;
+  const { username, email } = UserSchema;
   return validateBody({
     type: "object",
     properties: {
       username,
-      name,
-      bio,
+      email,
     },
-    required: ["username", "name", "bio"],
-    additionalProperties: false,
+    additionalProperties: true,
   });
 };
 
-export { signUpValidation, updateUserValidation };
+const updateAccountValidation = () => {
+  const { about, avatar, firstName, lastName, phone, birthday } = AccountSchema;
+  return validateBody({
+    type: "object",
+    properties: {
+      about,
+      avatar,
+      firstName,
+      lastName,
+      phone,
+      birthday,
+    },
+    additionalProperties: true,
+  });
+};
+
+export { signUpValidation, updateUserValidation, updateAccountValidation };

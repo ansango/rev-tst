@@ -1,4 +1,4 @@
-import { useCurrentUser } from "@/lib-client/user/hooks";
+import { useCurrentUser } from "@/lib-client/hooks/user";
 import Footer from "components/dashboard/Footer/Footer";
 import Navbar from "components/dashboard/Navbar/Navbar";
 import Sidebar from "components/dashboard/Sidebar/Sidebar";

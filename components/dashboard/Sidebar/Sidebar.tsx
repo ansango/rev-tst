@@ -1,11 +1,8 @@
-import { useCurrentUser } from "@/lib-client/user/hooks";
 import Icon from "components/common/Icons/Icon/Icon";
 import Link from "next/link";
-import { FC } from "react";
 import { routes } from "./routes";
 
 const Sidebar = () => {
-  const { data: { user } = {} } = useCurrentUser();
   return (
     <aside className="w-64 h-full hidden lg:block" aria-label="Sidebar">
       <div className="h-full py-4 px-3 bg-white rounded border">
