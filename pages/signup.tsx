@@ -16,7 +16,7 @@ const SignUp: NextPage = () => {
   const { replace } = useRouter();
   useEffect(() => {
     if (isValidating) return;
-    if (user) replace(`/user/settings/${user.username}`);
+    if (user) replace("/dashboard/settings/");
   }, [user, replace, isValidating]);
   const onSignUp = useCallback(
     async ({ username, email, password }: onSignUpDataService) => {
@@ -68,7 +68,8 @@ const SignUp: NextPage = () => {
                 required: { value: true, message: "Introduce una contraseña" },
                 minLength: {
                   value: 8,
-                  message: "Tu contraseña tiene que tener al menos 8 caracteres"
+                  message:
+                    "Tu contraseña tiene que tener al menos 8 caracteres",
                 },
               }}
             />
