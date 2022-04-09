@@ -1,7 +1,9 @@
 import { ErrorService, ResponseService } from "models/services";
 
-const errorService: ErrorService | any = {
+const errorAuthService: ErrorService | any = {
+  400: "Email introducido invalido",
   401: "Email o contraseña incorrectos",
+  403: "Email o nombre de usuario introducido ya en uso",
   default: "Error desconocido",
 };
 
@@ -11,4 +13,4 @@ const responseService: ResponseService = {
   default: "Todo salió bien",
 };
 
-export { errorService, responseService };
+export { errorAuthService, responseService };

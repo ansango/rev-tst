@@ -1,7 +1,7 @@
 import { User } from "models/user";
 import fetcher from "../fetcher";
 import toast from "react-hot-toast";
-import { errorService, responseService } from "lib/constants/services";
+import { errorAuthService, responseService } from "lib/constants/services";
 
 type onSignInDataService = {
   email: string;
@@ -24,7 +24,7 @@ const onSignInService = async ({
     toast.success(responseService.sigIn);
     return response.user;
   } catch (err: any) {
-    toast.error(errorService[err.error] || errorService.default);
+    toast.error(errorAuthService[err.error] || errorAuthService.default);
     throw err;
   }
 };
@@ -53,7 +53,7 @@ const onSignUpService = async ({
     toast.success(responseService.sigUp);
     return response.user;
   } catch (err: any) {
-    toast.error(errorService[err.error] || errorService.default);
+    toast.error(errorAuthService[err.error] || errorAuthService.default);
     throw err;
   }
 };

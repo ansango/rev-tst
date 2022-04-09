@@ -66,6 +66,10 @@ const SignUp: NextPage = () => {
               type="password"
               options={{
                 required: { value: true, message: "Introduce una contraseña" },
+                minLength: {
+                  value: 8,
+                  message: "Tu contraseña tiene que tener al menos 8 caracteres"
+                },
               }}
             />
             <Button label="Crear cuenta" fullWidth type="submit" />
