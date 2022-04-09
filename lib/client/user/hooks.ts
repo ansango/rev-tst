@@ -1,5 +1,6 @@
 import fetcher from "@/lib-client/fetcher";
-import { User } from "models/user";
+import { User } from "models/user/user";
+
 import useSWR from "swr";
 
 type Data = {

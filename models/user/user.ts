@@ -24,7 +24,7 @@ type User = {
 
 type Account = {
   about: Content;
-  avatar: Url;
+  avatar: Url | null;
   firstName: FirstName;
   lastName: LastName;
   phone: Phone;

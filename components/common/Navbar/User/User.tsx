@@ -60,10 +60,11 @@ const User: FC = () => {
         onClick={() => setShowPopper(!showPopper)}
         className="cursor-pointer"
       >
-        <Avatar
+        {/* <Avatar
           size="xsmall"
           imgUrl="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-        />
+        /> */}
+        <Avatar size="xsmall" imgUrl={user?.account.avatar} />
       </div>
       {showPopper ? (
         <div
@@ -74,7 +75,7 @@ const User: FC = () => {
         >
           <div className="py-3 px-4 text-gray-900">
             <span className="block text-sm">
-              {user?.name ?? user?.username}
+              {user?.account.firstName ?? user?.username}
             </span>
             <span className="block text-sm font-medium truncate">
               {user?.email}
