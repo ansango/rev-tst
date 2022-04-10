@@ -1,4 +1,5 @@
 import fetcher from "@/lib-client/fetcher";
+import { onSaveAccountService } from "@/lib-client/services/account";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Account } from "models/user/user";
 import type { AppState } from "../../index";
@@ -20,6 +21,15 @@ export const fetchAccount = createAsyncThunk(
     return response.account;
   }
 );
+
+export const updateAccount = createAsyncThunk(
+  "account/updateAccount",
+  async (account: Account) => {
+    const response = await onSaveAccountService({ account });
+    return response;
+  }
+);
+
 export const accountSlice = createSlice({
   name: "account",
   initialState,
@@ -38,6 +48,17 @@ export const accountSlice = createSlice({
         state.value = action.payload;
       })
       .addCase(fetchAccount.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(updateAccount.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateAccount.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = action.payload;
+      })
+      .addCase(updateAccount.rejected, (state) => {
         state.status = "failed";
       });
   },

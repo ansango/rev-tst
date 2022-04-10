@@ -61,7 +61,7 @@ const User: FC = () => {
         onClick={() => setShowPopper(!showPopper)}
         className="cursor-pointer"
       >
-        <Avatar size="xsmall" imgUrl={account?.avatar} />
+        <Avatar size="small" imgUrl={account?.avatar} />
       </div>
       {showPopper ? (
         <div

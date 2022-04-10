@@ -1,5 +1,6 @@
 import fetcher from "@/lib-client/fetcher";
 import { onSignInService, onSignOutService } from "@/lib-client/services/auth";
+import { onSaveUserService } from "@/lib-client/services/user";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "models/user/user";
 
@@ -32,6 +33,14 @@ export const signOut = createAsyncThunk("user/signOut", async () => {
   await onSignOutService();
   return null;
 });
+
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (user: User) => {
+    const response = await onSaveUserService({ user });
+    return response;
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -70,6 +79,17 @@ export const userSlice = createSlice({
         state.value = null;
       })
       .addCase(signOut.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(updateUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = action.payload;
+      })
+      .addCase(updateUser.rejected, (state) => {
         state.status = "failed";
       });
   },

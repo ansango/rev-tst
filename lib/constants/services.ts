@@ -15,7 +15,8 @@ const errorSaveDataAccountService: ErrorService | any = {
 const responseService: ResponseService = {
   sigIn: "Iniciaste sesión correctamente",
   sigUp: "Registraste correctamente",
-  saveDataAccount: "Datos actualizados",
+  saveAccount: "Cuenta actualizada",
+  saveUser: "Usuario actualizado",
   default: "Todo salió bien",
 };
 

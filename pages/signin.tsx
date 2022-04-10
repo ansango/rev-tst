@@ -28,7 +28,7 @@ const SignIn: NextPage = () => {
   );
   return (
     <GreyContainer>
-      <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
+      <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
         <Form onSubmit={onSignIn}>
           <div className="space-y-5">
             <h5 className="text-xl font-medium text-gray-900 dark:text-white">

@@ -18,7 +18,7 @@ const DashboardLayout: FC = ({ children }) => {
       <Navbar />
       <div className="h-full flex">
         <Sidebar />
-        <div className="w-full p-4 h-full flex flex-col justify-between">
+        <div className="w-full p-4 h-full flex flex-col justify-between space-y-5">
           <main className="h-full">{children}</main>
           <Footer />
         </div>

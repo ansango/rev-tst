@@ -1,7 +1,12 @@
-import { onSaveDataAccountService } from "@/lib-client/services/user";
-import { selectAccount } from "@/lib-client/store/features/account/accountSlice";
-import { selectUser } from "@/lib-client/store/features/user/userSlice";
-import { useAppSelector } from "@/lib-client/store/hooks";
+import {
+  selectAccount,
+  updateAccount,
+} from "@/lib-client/store/features/account/accountSlice";
+import {
+  selectUser,
+  updateUser,
+} from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import { Date, Form, Input, TextArea } from "components/common/Forms";
 import { Account, User } from "models/user/user";
@@ -24,6 +29,7 @@ type AccountDataForm = {
 const DataAccountForm = () => {
   const user = useAppSelector(selectUser);
   const account = useAppSelector(selectAccount);
+  const dispatch = useAppDispatch();
   const onSubmit = useCallback(
     async ({
       address,
@@ -54,90 +60,92 @@ const DataAccountForm = () => {
         birthday,
         address: { ...account.address, address, city, country, zip },
       };
-
-      const { userResponse, accountResponse } = await onSaveDataAccountService({
-        user: userData,
-        account: accountData,
-      });
+      dispatch(updateUser(userData));
+      dispatch(updateAccount(accountData));
     },
 
-    [user, account]
+    [dispatch, user, account]
   );
   if (!user || !account) return;
   return (
     <Form onSubmit={onSubmit}>
-      <div>
-        <Input
-          type="text"
-          name="username"
-          label="Nombre de usuario"
-          {...(user && { defaultValue: user.username })}
-        />
+      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
+        <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+          Información
+        </h5>
+        <div className="space-y-5">
+          <Input
+            type="text"
+            name="username"
+            label="Nombre de usuario"
+            {...(user && { defaultValue: user.username })}
+          />
 
-        <Input
-          type="text"
-          name="email"
-          label="Correo electrónico"
-          {...(user && { defaultValue: user.email })}
-        />
-        <TextArea
-          name="about"
-          label="Biografía"
-          {...(account && { defaultValue: account.about })}
-        />
-        <Input
-          type="text"
-          name="firstName"
-          label="Nombre"
-          {...(account && { defaultValue: account.firstName })}
-        />
+          <Input
+            type="text"
+            name="email"
+            label="Correo electrónico"
+            {...(user && { defaultValue: user.email })}
+          />
+          <TextArea
+            name="about"
+            label="Biografía"
+            {...(account && { defaultValue: account.about })}
+          />
+          <Input
+            type="text"
+            name="firstName"
+            label="Nombre"
+            {...(account && { defaultValue: account.firstName })}
+          />
 
-        <Input
-          type="text"
-          name="lastName"
-          label="Apellido"
-          {...(account && { defaultValue: account.lastName })}
-        />
+          <Input
+            type="text"
+            name="lastName"
+            label="Apellido"
+            {...(account && { defaultValue: account.lastName })}
+          />
 
-        <Input
-          type="tel"
-          name="phone"
-          label="Teléfono"
-          {...(account && { defaultValue: account.phone })}
-        />
+          <Input
+            type="tel"
+            name="phone"
+            label="Teléfono"
+            {...(account && { defaultValue: account.phone })}
+          />
 
-        <Date
-          type="date"
-          name="birthday"
-          label="Fecha de nacimiento"
-          {...(account && { defaultValue: account.birthday })}
-        />
+          <Date
+            type="date"
+            name="birthday"
+            label="Fecha de nacimiento"
+            {...(account && { defaultValue: account.birthday })}
+          />
 
-        <Input
-          type="text"
-          name="address"
-          label="Dirección"
-          {...(account && { defaultValue: account.address.address })}
-        />
-        <Input
-          type="text"
-          name="city"
-          label="Ciudad"
-          {...(account && { defaultValue: account.address.city })}
-        />
-        <Input
-          type="text"
-          name="country"
-          label="País"
-          {...(account && { defaultValue: account.address.country })}
-        />
-        <Input
-          type="text"
-          name="zip"
-          label="Código postal"
-          {...(account && { defaultValue: account.address.zip })}
-        />
-        <Button type="submit" label="Guardar" />
+          <Input
+            type="text"
+            name="address"
+            label="Dirección"
+            {...(account && { defaultValue: account.address.address })}
+          />
+          <Input
+            type="text"
+            name="city"
+            label="Ciudad"
+            {...(account && { defaultValue: account.address.city })}
+          />
+          <Input
+            type="text"
+            name="country"
+            label="País"
+            {...(account && { defaultValue: account.address.country })}
+          />
+          <Input
+            type="text"
+            name="zip"
+            label="Código postal"
+            {...(account && { defaultValue: account.address.zip })}
+          />
+          <Button type="submit" label="Guardar" />
+        </div>
       </div>
     </Form>
   );

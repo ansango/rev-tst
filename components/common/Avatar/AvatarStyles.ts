@@ -5,17 +5,17 @@
 export const bAv = "rounded-full";
 
 export enum size {
-  xsmall = "w-8 h-8",
-  small = "w-12 h-12",
-  base = "w-16 h-16",
-  large = "w-24 h-24",
-  xlarge = "w-32 h-32",
+  xsmall = "w-6 h-6",
+  small = "w-8 h-8",
+  base = "w-10 h-10",
+  large = "w-20 h-20",
+  xlarge = "w-36 h-36",
 }
 
 export enum sizeBlank {
-  xsmall = "w-10 h-10",
-  small = "w-14 h-14",
-  base = "w-18 h-18",
-  large = "w-26 h-26",
-  xlarge = "w-34 h-34",
+  xsmall = "w-8 h-8",
+  small = "w-10 h-10",
+  base = "w-12 h-12",
+  large = "w-24 h-24 -left-2",
+  xlarge = "w-40 h-40 -left-2",
 }

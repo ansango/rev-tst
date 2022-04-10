@@ -9,7 +9,8 @@ type ErrorService = {
 type ResponseService = {
   sigIn: string;
   sigUp: string;
-  saveDataAccount: string;
+  saveUser: string;
+  saveAccount: string;
   default: string;
 };
 
