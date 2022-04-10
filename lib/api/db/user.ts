@@ -57,6 +57,16 @@ const findUserByEmail = async (db: Db, email: string) => {
     .then((user) => user || null);
 };
 
+const updateUserAccountDataById = async (
+  db: Db,
+  userId: string,
+  { email, username }: { email: string; username: string }
+) => {
+  return db
+    .collection("users")
+    .updateOne({ _id: new ObjectId(userId) }, { $set: { email, username } });
+};
+
 const insertUser = async (
   db: Db,
   {
@@ -119,5 +129,6 @@ export {
   findUserById,
   findUserByUsername,
   findUserByEmail,
+  updateUserAccountDataById,
   insertUser,
 };

@@ -7,6 +7,7 @@ import React, { FC, useEffect } from "react";
 
 const DashboardLayout: FC = ({ children }) => {
   const { data: { user } = {}, mutate, isValidating } = useCurrentUser();
+  console.log(user);
   const { replace } = useRouter();
   useEffect(() => {
     if (isValidating) return;
