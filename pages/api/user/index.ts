@@ -19,21 +19,20 @@ handler.get(async (req, res) => {
 });
 
 handler.patch(updateUserValidation(), async (req, res) => {
-  // if user is not logged in
   if (!req.user) return res.status(401).json({ error: "Unauthorized" });
-  // if username exists and is not the same as the current user
+
   if (req.body.username && req.body.username !== req.user.username) {
     const existingUser = await findUserByUsername(req.db, req.body.username);
     if (existingUser)
       return res.status(400).json({ error: "Username already exists" });
   }
-  // if email exists and is not the same as the current user
+
   if (req.body.email && req.body.email !== req.user.email) {
     const existingUser = await findUserByEmail(req.db, req.body.email);
     if (existingUser)
       return res.status(400).json({ error: "Email already exists" });
   }
-  // update user
+
   const user = await updateUserAccountDataById(req.db, req.user._id, req.body);
   console.log(user);
 

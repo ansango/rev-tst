@@ -1,4 +1,5 @@
 import fetcher from "@/lib-client/fetcher";
+import { useCurrentAccount } from "@/lib-client/hooks/account";
 import { useCurrentUser } from "@/lib-client/hooks/user";
 import { onSignOutService } from "@/lib-client/services/auth";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import Avatar from "../../Avatar/Avatar";
 
 const User: FC = () => {
   const { data: { user } = {}, mutate } = useCurrentUser();
+  const { data: { account } = {} } = useCurrentAccount();
 
   const [showPopper, setShowPopper] = useState(false);
   const buttonRef = useRef(null);
@@ -60,11 +62,7 @@ const User: FC = () => {
         onClick={() => setShowPopper(!showPopper)}
         className="cursor-pointer"
       >
-        {/* <Avatar
-          size="xsmall"
-          imgUrl="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-        /> */}
-        <Avatar size="xsmall" imgUrl={user?.account.avatar} />
+        <Avatar size="xsmall" imgUrl={account?.avatar} />
       </div>
       {showPopper ? (
         <div
@@ -75,7 +73,7 @@ const User: FC = () => {
         >
           <div className="py-3 px-4 text-gray-900">
             <span className="block text-sm">
-              {user?.account.firstName ?? user?.username}
+              {account?.firstName ?? user?.username}
             </span>
             <span className="block text-sm font-medium truncate">
               {user?.email}

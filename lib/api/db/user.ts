@@ -13,8 +13,8 @@ const dbProjectionUsers = (prefix = "") => {
 
 const findUserWithEmailAndPassword = async (
   db: Db,
-  email: string,
-  password: string
+  email: Email,
+  password: Password
 ) => {
   const user = await db
     .collection("users")
@@ -26,28 +26,28 @@ const findUserWithEmailAndPassword = async (
   return null;
 };
 
-const findUserForAuth = async (db: Db, userId: string) => {
+const findUserForAuth = async (db: Db, userId: UserId) => {
   return db
     .collection("users")
     .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } })
     .then((user) => user || null);
 };
 
-const findUserById = async (db: Db, userId: string) => {
+const findUserById = async (db: Db, userId: UserId) => {
   return db
     .collection("users")
     .findOne({ _id: new ObjectId(userId) }, { projection: dbProjectionUsers() })
     .then((user) => user || null);
 };
 
-const findUserByUsername = async (db: Db, username: string) => {
+const findUserByUsername = async (db: Db, username: Username) => {
   return db
     .collection("users")
     .findOne({ username }, { projection: dbProjectionUsers() })
     .then((user) => user || null);
 };
 
-const findUserByEmail = async (db: Db, email: string) => {
+const findUserByEmail = async (db: Db, email: Email) => {
   return db
     .collection("users")
     .findOne(
@@ -59,8 +59,8 @@ const findUserByEmail = async (db: Db, email: string) => {
 
 const updateUserAccountDataById = async (
   db: Db,
-  userId: string,
-  { email, username }: { email: string; username: string }
+  userId: UserId,
+  { email, username }: { email: Email; username: Username }
 ) => {
   return db
     .collection("users")
@@ -74,9 +74,9 @@ const insertUser = async (
     originalPassword,
     username,
   }: {
-    email: string;
-    originalPassword: string;
-    username: string;
+    email: Email;
+    originalPassword: Password;
+    username: Username;
   }
 ) => {
   const password = await bcrypt.hash(originalPassword, 10);
@@ -109,7 +109,7 @@ const insertUser = async (
 
   const user: User = {
     _id: new ObjectId(),
-    account: account._id,
+    accountId: account._id,
     username,
     email,
     emailVerified: false,

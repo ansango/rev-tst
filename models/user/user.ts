@@ -11,7 +11,7 @@ type User = {
   emailVerified: boolean;
   username: Username;
   password: Password;
-  account: AccountId;
+  accountId: AccountId;
   created: Date;
 };
 

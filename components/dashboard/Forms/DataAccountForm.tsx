@@ -81,7 +81,11 @@ const DataAccountForm = () => {
           label="Correo electrónico"
           {...(user && { defaultValue: user.email })}
         />
-        <TextArea name="about" label="Biografía" />
+        <TextArea
+          name="about"
+          label="Biografía"
+          {...(account && { defaultValue: account.about })}
+        />
         <Input
           type="text"
           name="firstName"
