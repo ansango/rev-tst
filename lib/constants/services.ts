@@ -7,10 +7,16 @@ const errorAuthService: ErrorService | any = {
   default: "Error desconocido",
 };
 
+const errorSaveDataAccountService: ErrorService | any = {
+  400: "Error al guardar los datos",
+  default: "Error desconocido",
+};
+
 const responseService: ResponseService = {
   sigIn: "Iniciaste sesión correctamente",
   sigUp: "Registraste correctamente",
+  saveDataAccount: "Datos actualizados",
   default: "Todo salió bien",
 };
 
-export { errorAuthService, responseService };
+export { errorAuthService, responseService, errorSaveDataAccountService };

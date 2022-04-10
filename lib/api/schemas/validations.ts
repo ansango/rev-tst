@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import { AccountSchema, UserSchema } from ".";
+import { AccountSchema, AddressSchema, UserSchema } from ".";
 
 type Schema = {
   type: "object";
@@ -72,4 +72,9 @@ const updateAccountValidation = () => {
   });
 };
 
-export { signUpValidation, updateUserValidation, updateAccountValidation };
+export {
+  signUpValidation,
+  updateUserValidation,
+  updateAccountValidation,
+  // updateAddressValidation,
+};

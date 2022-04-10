@@ -1,9 +1,8 @@
+import { useCurrentUser } from "@/lib-client/hooks/user";
 import {
   onSignInService,
   onSignInDataService,
 } from "@/lib-client/services/auth";
-
-import { useCurrentUser } from "@/lib-client/hooks/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";

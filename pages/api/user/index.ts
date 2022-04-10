@@ -15,25 +15,9 @@ handler.get(async (req, res) => {
 });
 
 handler.patch(updateUserValidation(), async (req, res) => {
-  const { user } = req;
-  if (!user) {
-    req.status(401).end();
-    return;
-  }
-
-  let username;
-  if (req.body.username) {
-    username = slug(req.body.username);
-    if (
-      username !== req.user.username &&
-      (await findUserByUsername(req.db, username))
-    ) {
-      req.status(403).json({
-        error: { message: "El nombre de usuario ya está en uso" },
-      });
-      return;
-    }
-  }
+  return res.json({
+    data: req.body,
+  });
 });
 
 export default handler;

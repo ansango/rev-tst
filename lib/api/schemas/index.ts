@@ -1,33 +1,17 @@
 const AddressSchema = {
-  address: {
-    type: "string",
-    minLength: 1,
-    maxLength: 255,
-  },
-  city: {
-    type: "string",
-    minLength: 1,
-    maxLength: 255,
-  },
-  country: {
-    type: "string",
-    minLength: 1,
-    maxLength: 255,
-  },
-  zip: {
-    type: "string",
-    minLength: 1,
-    maxLength: 255,
-  },
+  address: { type: "string" },
+  city: { type: "string" },
+  country: { type: "string" },
+  zip: { type: "string" },
 };
 
 const AccountSchema = {
-  about: { type: "string", minLength: 1 },
-  avatar: { type: "string", minLength: 1 },
-  firstName: { type: "string", minLength: 1 },
-  lastName: { type: "string", minLength: 1 },
-  phone: { type: "string", minLength: 1 },
-  birthday: { type: "string", minLength: 1 },
+  about: { type: "string" },
+  avatar: { type: "string" },
+  firstName: { type: "string" },
+  lastName: { type: "string" },
+  phone: { type: "string" },
+  birthday: { type: "string" },
 };
 
 const UserSchema = {
