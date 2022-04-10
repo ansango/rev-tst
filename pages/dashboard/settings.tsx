@@ -5,9 +5,13 @@ import React from "react";
 
 const Settings: NextPage = () => {
   return (
-    <div className="space-y-5">
-      <AvatarForm /> 
-      <DataAccountForm />
+    <div className="grid lg:grid-cols-12 md:space-y-0 gap-5">
+      <div className="col-span-full md:col-span-4 lg:col-span-full xl:col-span-5">
+        <AvatarForm />
+      </div>
+      <div className="col-span-full md:col-span-8 lg:col-span-full xl:col-span-7">
+        <DataAccountForm />
+      </div>
     </div>
   );
 };
