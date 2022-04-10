@@ -20,12 +20,12 @@ handler.patch(updateAccountValidation(), async (req, res) => {
   if (!req.user) return res.status(401).json({ error: "Unauthorized" });
   const account = await findAccountByUserId(req.db, req.user.accountId);
   if (!account) return res.status(404).json({ error: "Account not found" });
-  const updatedAccount = await updateAccountDataById(
-    req.db,
-    req.user.accountId,
-    req.body
-  );
-  return res.json({ account: updatedAccount });
+  try {
+    await updateAccountDataById(req.db, req.user.accountId, req.body);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+  return res.json({ account: req.body });
 });
 
 export default handler;

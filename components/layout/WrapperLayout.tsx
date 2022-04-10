@@ -1,4 +1,8 @@
-import { fetchUser } from "@/lib-client/store/features/user/userSlice";
+import { fetchAccount } from "@/lib-client/store/features/account/accountSlice";
+import {
+  fetchUser,
+  selectUser,
+} from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
@@ -8,9 +12,11 @@ import MainLayout from "./MainLayout";
 const WrapperLayout: FC = ({ children }) => {
   const isDashboard = useRouter().pathname.includes("/dashboard");
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
   useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+    if (!user) dispatch(fetchUser());
+    if (user) dispatch(fetchAccount());
+  }, [user, dispatch]);
   return (
     <>
       {!isDashboard && <MainLayout>{children}</MainLayout>}

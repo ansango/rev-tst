@@ -32,9 +32,7 @@ handler.patch(updateUserValidation(), async (req, res) => {
     if (existingUser)
       return res.status(400).json({ error: "Email already exists" });
   }
-
-  const user = await updateUserAccountDataById(req.db, req.user._id, req.body);
-  console.log(user);
+  await updateUserAccountDataById(req.db, req.user._id, req.body);
 
   return res.json({
     user: req.body,

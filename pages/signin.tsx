@@ -2,8 +2,8 @@ import {
   onSignInService,
   onSignInDataService,
 } from "@/lib-client/services/auth";
-import { selectUser } from "@/lib-client/store/features/user/userSlice";
-import { useAppSelector } from "@/lib-client/store/hooks";
+import { selectUser, signIn } from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";
@@ -14,6 +14,7 @@ import { useCallback, useEffect } from "react";
 
 const SignIn: NextPage = () => {
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -21,14 +22,9 @@ const SignIn: NextPage = () => {
   }, [user, router]);
 
   const onSignIn = useCallback(
-    async ({ email, password }: onSignInDataService) => {
-      try {
-        const response = await onSignInService({ email, password });
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    []
+    ({ email, password }: onSignInDataService) =>
+      dispatch(signIn({ email, password })),
+    [dispatch]
   );
   return (
     <GreyContainer>

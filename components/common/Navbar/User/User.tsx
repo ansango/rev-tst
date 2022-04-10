@@ -1,22 +1,25 @@
-
-import { useCurrentAccount } from "@/lib-client/hooks/account";
-import { onSignOutService } from "@/lib-client/services/auth";
-import { selectUser } from "@/lib-client/store/features/user/userSlice";
-import { useAppSelector } from "@/lib-client/store/hooks";
+import {
+  removeAccount,
+  selectAccount,
+} from "@/lib-client/store/features/account/accountSlice";
+import {
+  selectUser,
+  signOut,
+} from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import Avatar from "../../Avatar/Avatar";
 
 const User: FC = () => {
   const user = useAppSelector(selectUser);
-  const { data: { account } = {} } = useCurrentAccount();
-
+  const account = useAppSelector(selectAccount);
+  const dispatch = useAppDispatch();
   const [showPopper, setShowPopper] = useState(false);
   const buttonRef = useRef(null);
   const popperRef = useRef(null);
-  const { replace } = useRouter();
   const { styles, attributes } = usePopper(
     buttonRef.current,
     popperRef.current,
@@ -46,14 +49,10 @@ const User: FC = () => {
     }
   };
 
-  const onSignOut = useCallback(async () => {
-    try {
-      await onSignOutService();
-      replace("/");
-    } catch (e) {
-      console.error(e);
-    }
-  }, [replace]);
+  const onSignOut = useCallback(() => {
+    dispatch(signOut());
+    dispatch(removeAccount());
+  }, [dispatch]);
 
   return (
     <div className="relative">
