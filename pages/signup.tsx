@@ -1,8 +1,9 @@
-import { useCurrentUser } from "@/lib-client/hooks/user";
 import {
   onSignUpDataService,
   onSignUpService,
 } from "@/lib-client/services/auth";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import { useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";
@@ -12,22 +13,20 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 
 const SignUp: NextPage = () => {
-  const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
+  const user = useAppSelector(selectUser);
   const { replace } = useRouter();
   useEffect(() => {
-    if (isValidating) return;
     if (user) replace("/dashboard/settings/");
-  }, [user, replace, isValidating]);
+  }, [user, replace]);
   const onSignUp = useCallback(
     async ({ username, email, password }: onSignUpDataService) => {
       try {
         const response = await onSignUpService({ username, email, password });
-        mutate({ user: response }, false);
       } catch (e) {
         console.log(e);
       }
     },
-    [mutate]
+    []
   );
   return (
     <GreyContainer>
@@ -60,7 +59,8 @@ const SignUp: NextPage = () => {
                 },
                 minLength: {
                   value: 4,
-                  message: "El nombre de usuario debe tener al menos 4 caracteres",
+                  message:
+                    "El nombre de usuario debe tener al menos 4 caracteres",
                 },
               }}
             />

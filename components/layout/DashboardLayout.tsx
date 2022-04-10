@@ -1,4 +1,5 @@
-import { useCurrentUser } from "@/lib-client/hooks/user";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import { useAppSelector } from "@/lib-client/store/hooks";
 import Footer from "components/dashboard/Footer/Footer";
 import Navbar from "components/dashboard/Navbar/Navbar";
 import Sidebar from "components/dashboard/Sidebar/Sidebar";
@@ -6,13 +7,11 @@ import { useRouter } from "next/router";
 import React, { FC, useEffect } from "react";
 
 const DashboardLayout: FC = ({ children }) => {
-  const { data: { user } = {}, mutate, isValidating } = useCurrentUser();
-  console.log(user);
+  const user = useAppSelector(selectUser);
   const { replace } = useRouter();
   useEffect(() => {
-    if (isValidating) return;
     if (!user) replace("/signin");
-  }, [user, replace, isValidating]);
+  }, [user, replace]);
   if (!user) return null;
   return (
     <div className="flex flex-col justify-between h-screen bg-gray-100">

@@ -1,7 +1,8 @@
-import fetcher from "@/lib-client/fetcher";
+
 import { useCurrentAccount } from "@/lib-client/hooks/account";
-import { useCurrentUser } from "@/lib-client/hooks/user";
 import { onSignOutService } from "@/lib-client/services/auth";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import { useAppSelector } from "@/lib-client/store/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
@@ -9,7 +10,7 @@ import { usePopper } from "react-popper";
 import Avatar from "../../Avatar/Avatar";
 
 const User: FC = () => {
-  const { data: { user } = {}, mutate } = useCurrentUser();
+  const user = useAppSelector(selectUser);
   const { data: { account } = {} } = useCurrentAccount();
 
   const [showPopper, setShowPopper] = useState(false);
@@ -48,12 +49,11 @@ const User: FC = () => {
   const onSignOut = useCallback(async () => {
     try {
       await onSignOutService();
-      mutate({ user: null });
       replace("/");
     } catch (e) {
       console.error(e);
     }
-  }, [mutate, replace]);
+  }, [replace]);
 
   return (
     <div className="relative">

@@ -1,6 +1,7 @@
 import { useCurrentAccount } from "@/lib-client/hooks/account";
-import { useCurrentUser } from "@/lib-client/hooks/user";
 import { onSaveDataAccountService } from "@/lib-client/services/user";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import { useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import { Date, Form, Input, TextArea } from "components/common/Forms";
 import { Account, User } from "models/user/user";
@@ -21,7 +22,7 @@ type AccountDataForm = {
 };
 
 const DataAccountForm = () => {
-  const { data: { user } = {}, mutate: mutateUser } = useCurrentUser();
+  const user = useAppSelector(selectUser);
   const { data: { account } = {}, mutate: mutateAccount } = useCurrentAccount();
   const onSubmit = useCallback(
     async ({
@@ -58,11 +59,10 @@ const DataAccountForm = () => {
         user: userData,
         account: accountData,
       });
-      mutateUser({ user: userResponse }, false);
       mutateAccount({ account: accountResponse }, false);
     },
 
-    [mutateUser, mutateAccount, user, account]
+    [mutateAccount, user, account]
   );
 
   return (

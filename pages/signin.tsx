@@ -1,8 +1,9 @@
-import { useCurrentUser } from "@/lib-client/hooks/user";
 import {
   onSignInService,
   onSignInDataService,
 } from "@/lib-client/services/auth";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import { useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";
@@ -12,24 +13,22 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 
 const SignIn: NextPage = () => {
-  const { data: { user } = {}, mutate, isValidating, error } = useCurrentUser();
+  const user = useAppSelector(selectUser);
   const router = useRouter();
 
   useEffect(() => {
-    if (isValidating) return;
     if (user) router.replace("/dashboard/settings/");
-  }, [user, router, isValidating]);
+  }, [user, router]);
 
   const onSignIn = useCallback(
     async ({ email, password }: onSignInDataService) => {
       try {
         const response = await onSignInService({ email, password });
-        mutate({ user: response }, false);
       } catch (e) {
         console.log(e);
       }
     },
-    [mutate]
+    []
   );
   return (
     <GreyContainer>

@@ -7,11 +7,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import AddRecipe from "components/common/Navbar/AddRecipe";
 import { useEffect, useState } from "react";
-import { useCurrentUser } from "@/lib-client/hooks/user";
+import { useAppSelector } from "@/lib-client/store/hooks";
+import { selectUser } from "@/lib-client/store/features/user/userSlice";
 
 const Navbar = () => {
   const { pathname } = useRouter();
-  const { data: { user } = {} } = useCurrentUser();
+  const user = useAppSelector(selectUser);
+
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     setToggle(false);
