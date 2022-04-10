@@ -5,7 +5,7 @@ import { useAppSelector } from "@/lib-client/store/hooks";
 import Avatar from "components/common/Avatar/Avatar";
 import Button from "components/common/Button/Button/Button";
 import { Form } from "components/common/Forms";
-import File from "components/common/Forms/FileButton";
+import File from "components/common/Forms/File";
 import { useCallback } from "react";
 
 const AvatarForm = () => {
