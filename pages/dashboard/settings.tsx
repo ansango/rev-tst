@@ -6,7 +6,7 @@ import React from "react";
 const Settings: NextPage = () => {
   return (
     <div className="space-y-5">
-      {/* <AvatarForm /> */}
+      <AvatarForm /> 
       <DataAccountForm />
     </div>
   );
