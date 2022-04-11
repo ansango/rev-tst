@@ -3,15 +3,13 @@ import toast from "react-hot-toast";
 import { errorAuthService, responseService } from "lib/constants/services";
 import { User } from "models/user/user";
 
-type onSignInDataService = {
-  email: string;
-  password: string;
-};
-
 const onSignInService = async ({
   email,
   password,
-}: onSignInDataService): Promise<User> => {
+}: {
+  email: Email;
+  password: Password;
+}): Promise<User> => {
   try {
     const response = await fetcher("/api/auth/signin", {
       method: "POST",
@@ -29,17 +27,15 @@ const onSignInService = async ({
   }
 };
 
-type onSignUpDataService = {
-  email: string;
-  password: string;
-  username: string;
-};
-
 const onSignUpService = async ({
   email,
   password,
   username,
-}: onSignUpDataService): Promise<User> => {
+}: {
+  email: Email;
+  password: Password;
+  username: Username;
+}): Promise<User> => {
   try {
     const response = await fetcher("/api/auth/signup", {
       method: "POST",
@@ -68,10 +64,4 @@ const onSignOutService = async (): Promise<void> => {
   }
 };
 
-export {
-  onSignInService,
-  type onSignInDataService,
-  onSignUpService,
-  type onSignUpDataService,
-  onSignOutService,
-};
+export { onSignInService, onSignUpService, onSignOutService };

@@ -51,7 +51,7 @@ const SignIn: NextPage = () => {
               }}
             />
             <p>
-              <Link href="/signup">
+              <Link href="/forget">
                 <a className="text-blue-700 hover:underline dark:text-blue-500 text-sm">
                   ¿Olvidaste tu contraseña?
                 </a>

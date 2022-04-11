@@ -6,13 +6,11 @@ import { Account, User } from "models/user/user";
 import toast from "react-hot-toast";
 import fetcher from "../fetcher";
 
-type onSaveAccountService = {
-  account: Account;
-};
-
 const onSaveAccountService = async ({
   account,
-}: onSaveAccountService): Promise<Account> => {
+}: {
+  account: Account;
+}): Promise<Account> => {
   try {
     const response = await fetcher("/api/account", {
       method: "PATCH",
@@ -32,13 +30,11 @@ const onSaveAccountService = async ({
   }
 };
 
-type onUpdateAvatarAccountService = {
-  formData: FormData;
-};
-
 const onUpdateAvatarAccountService = async ({
   formData,
-}: onUpdateAvatarAccountService): Promise<{ avatar: Url }> => {
+}: {
+  formData: FormData;
+}): Promise<{ avatar: Url }> => {
   try {
     const response = await fetcher("/api/account/avatar", {
       method: "PATCH",
@@ -55,6 +51,5 @@ const onUpdateAvatarAccountService = async ({
     throw err;
   }
 };
-
 
 export { onSaveAccountService, onUpdateAvatarAccountService };
