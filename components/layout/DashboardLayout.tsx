@@ -14,12 +14,13 @@ const DashboardLayout: FC = ({ children }) => {
   }, [user, replace]);
   if (!user) return null;
   return (
-    <div className="flex flex-col justify-between h-screen bg-gray-100">
+    <div className="bg-gray-100">
       <Navbar />
-      <div className="h-full flex">
+      <div className="grid grid-cols-12 gap-5 h-[93.6vh]">
         <Sidebar />
-        <div className="w-full p-4 h-full flex flex-col justify-between space-y-5">
-          <main className="h-full">{children}</main>
+
+        <div className="col-span-full lg:col-span-9 xl:col-span-10 space-y-5 py-5 px-5 lg:pl-0 flex flex-col justify-between">
+          <main className="">{children}</main>
           <Footer />
         </div>
       </div>

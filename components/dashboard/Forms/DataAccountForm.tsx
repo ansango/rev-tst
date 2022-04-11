@@ -73,7 +73,7 @@ const DataAccountForm: FC = () => {
         <h5 className="text-xl font-medium text-gray-900 dark:text-white">
           Información
         </h5>
-        <div className="space-y-5">
+        <div className="space-y-5 md:space-y-0 md:grid md:gap-5 md:grid-cols-2">
           <Input
             type="text"
             name="username"
@@ -87,11 +87,13 @@ const DataAccountForm: FC = () => {
             label="Correo electrónico"
             {...(user && { defaultValue: user.email })}
           />
-          <TextArea
-            name="about"
-            label="Biografía"
-            {...(account && { defaultValue: account.about })}
-          />
+          <div className="col-span-2">
+            <TextArea
+              name="about"
+              label="Biografía"
+              {...(account && { defaultValue: account.about })}
+            />
+          </div>
           <Input
             type="text"
             name="firstName"
@@ -144,7 +146,9 @@ const DataAccountForm: FC = () => {
             label="Código postal"
             {...(account && { defaultValue: account.address.zip })}
           />
-          <Button type="submit" label="Guardar" />
+          <div className="col-span-2">
+            <Button type="submit" label="Guardar" />
+          </div>
         </div>
       </div>
     </Form>

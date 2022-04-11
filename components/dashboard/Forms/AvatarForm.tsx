@@ -29,33 +29,33 @@ const AvatarForm = () => {
   );
   return (
     <Form onSubmit={onSubmit}>
-      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
-        <div className="flex space-x-3 items-center sm:space-x-6">
-          <div>
+      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 space-y-5">
+        <div className="grid grid-cols-12 gap-5">
+          <div className="col-span-3">
             <Avatar size="large" imgUrl={account?.avatar} />
           </div>
-          <div className="w-full space-y-5">
-            <div>
-              {account?.firstName && (
-                <h5 className="text-xl font-medium text-gray-900">
-                  {account.firstName} {account?.lastName}
-                </h5>
-              )}
-              {!account?.firstName && (
-                <h5 className="text-xl font-medium text-gray-900">
-                  @{user?.username}
-                </h5>
-              )}
-              {account?.firstName && (
-                <h4 className="text-gray-600">@{user?.username}</h4>
-              )}
-            </div>
-            <div className="md:flex items-baseline md:space-x-5">
-              <File name="file" />
-              <div>
-                <Button label="Guardar" type="submit" fullWidth />
-              </div>
-            </div>
+          <div className="col-span-9">
+            {account?.firstName && (
+              <h5 className="text-xl font-medium text-gray-900">
+                {account.firstName} {account?.lastName}
+              </h5>
+            )}
+            {!account?.firstName && (
+              <h5 className="text-xl font-medium text-gray-900">
+                @{user?.username}
+              </h5>
+            )}
+            {account?.firstName && (
+              <h4 className="text-gray-600">@{user?.username}</h4>
+            )}
+          </div>
+        </div>
+        <div className="">
+          <div className="col-span-6">
+            <File name="file" />
+          </div>
+          <div>
+            <Button label="Guardar" type="submit" />
           </div>
         </div>
       </div>

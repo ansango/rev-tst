@@ -4,7 +4,7 @@ import React, { FC } from "react";
 
 const MainLayout: FC = ({ children }) => {
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between h-screen bg-white">
       <Navbar />
       {children}
       <Footer />

@@ -4,7 +4,10 @@ import { routes } from "./routes";
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-full hidden lg:block" aria-label="Sidebar">
+    <aside
+      className=" h-full hidden lg:block lg:col-span-3 xl:col-span-2"
+      aria-label="Sidebar"
+    >
       <div className="h-full py-4 px-3 bg-white rounded border">
         <ul className="space-y-2">
           {routes.map(({ label, path, icon }) => (
