@@ -27,6 +27,7 @@ handler.patch(upload.single("avatar"), async (req, res) => {
   if (!req.user) return res.status(401).json({ error: "Unauthorized" });
   if (!req.file)
     return res.status(400).json({ error: "You must attach an image" });
+
   const { secure_url: avatar } = await cloudinary.uploader.upload(
     req.file.path,
     {

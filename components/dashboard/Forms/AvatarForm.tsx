@@ -16,10 +16,12 @@ const AvatarForm = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const onSubmit = useCallback(
-    async ({ avatar }) => {
-      if (avatar[0]) {
+    async ({ file }) => {
+      const avatar = file[0];
+      const isImage = avatar ? avatar.type.startsWith("image") : null;
+      if (avatar && isImage) {
         const formData = new FormData();
-        formData.append("avatar", avatar[0]);
+        formData.append("avatar", avatar);
         dispatch(updateAvatar(formData));
       }
     },
@@ -49,7 +51,7 @@ const AvatarForm = () => {
               )}
             </div>
             <div className="md:flex items-baseline md:space-x-5">
-              <File name="avatar" />
+              <File name="file" />
               <div>
                 <Button label="Guardar" type="submit" fullWidth />
               </div>
