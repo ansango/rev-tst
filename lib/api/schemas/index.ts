@@ -20,6 +20,11 @@ const UserSchema = {
   email: { type: "string", minLength: 1 },
 };
 
+const PasswordSchema = {
+  oldPassword: { type: "string", minLength: 8 },
+  newPassword: { type: "string", minLength: 8 },
+};
+
 const PostSchema = {
   content: { type: "string", minLength: 1, maxLength: 280 },
 };
@@ -27,4 +32,4 @@ const CommentSchema = {
   content: { type: "string", minLength: 1, maxLength: 280 },
 };
 
-export { UserSchema, AccountSchema, AddressSchema, PostSchema, CommentSchema };
+export { UserSchema, AccountSchema, PasswordSchema, PostSchema, CommentSchema };

@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import { AccountSchema, AddressSchema, UserSchema } from ".";
+import { AccountSchema, PasswordSchema, UserSchema } from ".";
 
 type Schema = {
   type: "object";
@@ -72,9 +72,22 @@ const updateAccountValidation = () => {
   });
 };
 
+const updatePasswordValidation = () => {
+  const { oldPassword, newPassword } = PasswordSchema;
+  return validateBody({
+    type: "object",
+    properties: {
+      oldPassword,
+      newPassword,
+    },
+    required: ["oldPassword", "newPassword"],
+    additionalProperties: false,
+  });
+};
+
 export {
   signUpValidation,
   updateUserValidation,
   updateAccountValidation,
-  // updateAddressValidation,
+  updatePasswordValidation,
 };

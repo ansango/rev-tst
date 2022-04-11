@@ -1,9 +1,6 @@
-import {
-  onSignUpDataService,
-  onSignUpService,
-} from "@/lib-client/services/auth";
-import { selectUser } from "@/lib-client/store/features/user/userSlice";
-import { useAppSelector } from "@/lib-client/store/hooks";
+import { onSignUpService } from "@/lib-client/services/auth";
+import { selectUser, signUp } from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";
@@ -14,19 +11,24 @@ import { useCallback, useEffect } from "react";
 
 const SignUp: NextPage = () => {
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const { replace } = useRouter();
   useEffect(() => {
     if (user) replace("/dashboard/settings/");
   }, [user, replace]);
   const onSignUp = useCallback(
-    async ({ username, email, password }: onSignUpDataService) => {
-      try {
-        const response = await onSignUpService({ username, email, password });
-      } catch (e) {
-        console.log(e);
-      }
+    ({
+      username,
+      email,
+      password,
+    }: {
+      username: Username;
+      email: Email;
+      password: Password;
+    }) => {
+      dispatch(signUp({ username, email, password }));
     },
-    []
+    [dispatch]
   );
   return (
     <GreyContainer>

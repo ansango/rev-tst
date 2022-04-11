@@ -46,14 +46,11 @@ const createIndexes = async (db: Db) => {
         { key: { chatId: -1 } },
         { key: { userId: -1 } },
       ]),
-    db
-      .collection("accounts")
-      .createIndexes([
-        { key: { userId: -1 } },
-        { key: { email: 1 }, unique: true },
-        { key: { username: 1 }, unique: true },
-      ]),
-    db.collection("users").createIndexes([{ key: { accountId: -1 } }]),
+    db.collection("accounts").createIndexes([{ key: { accountId: -1 } }]),
+    db.collection("users").createIndexes([
+      { key: { email: 1 }, unique: true },
+      { key: { username: 1 }, unique: true },
+    ]),
   ]);
   indexesCreated = true;
 };

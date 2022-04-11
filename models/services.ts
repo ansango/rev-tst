@@ -12,6 +12,7 @@ type ResponseService = {
   saveUser: string;
   saveAccount: string;
   updateAvatarAccount: string;
+  updatePassword: string;
   default: string;
 };
 

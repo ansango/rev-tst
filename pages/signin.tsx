@@ -1,7 +1,3 @@
-import {
-  onSignInService,
-  onSignInDataService,
-} from "@/lib-client/services/auth";
 import { selectUser, signIn } from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
@@ -22,7 +18,7 @@ const SignIn: NextPage = () => {
   }, [user, router]);
 
   const onSignIn = useCallback(
-    ({ email, password }: onSignInDataService) =>
+    ({ email, password }: { email: Email; password: Password }) =>
       dispatch(signIn({ email, password })),
     [dispatch]
   );

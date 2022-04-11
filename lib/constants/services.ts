@@ -1,5 +1,15 @@
 import { ErrorService, ResponseService } from "models/services";
 
+const responseService: ResponseService = {
+  sigIn: "Iniciaste sesión correctamente",
+  sigUp: "Registraste correctamente",
+  saveAccount: "Cuenta actualizada",
+  saveUser: "Usuario actualizado",
+  updateAvatarAccount: "Avatar actualizado",
+  updatePassword: "Contraseña actualizada",
+  default: "Todo salió bien",
+};
+
 const errorAuthService: ErrorService | any = {
   400: "Email o nombre de usuario invalido",
   401: "Email o contraseña incorrectos",
@@ -21,13 +31,10 @@ const errorUpdateAvatar: ErrorService | any = {
   default: "Error al actualizar la imagen",
 };
 
-const responseService: ResponseService = {
-  sigIn: "Iniciaste sesión correctamente",
-  sigUp: "Registraste correctamente",
-  saveAccount: "Cuenta actualizada",
-  saveUser: "Usuario actualizado",
-  updateAvatarAccount: "Avatar actualizado",
-  default: "Todo salió bien",
+const errorUpdatePassword: ErrorService | any = {
+  400: "Contraseña actual incorrecta",
+  500: "Error del servidor",
+  default: "Error al actualizar la contraseña",
 };
 
 export {
@@ -35,4 +42,5 @@ export {
   responseService,
   errorSaveDataAccountService,
   errorUpdateAvatar,
+  errorUpdatePassword,
 };

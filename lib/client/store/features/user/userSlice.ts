@@ -1,6 +1,13 @@
 import fetcher from "@/lib-client/fetcher";
-import { onSignInService, onSignOutService } from "@/lib-client/services/auth";
-import { onSaveUserService } from "@/lib-client/services/user";
+import {
+  onSignInService,
+  onSignOutService,
+  onSignUpService,
+} from "@/lib-client/services/auth";
+import {
+  onSaveUserService,
+  onUpdatePasswordService,
+} from "@/lib-client/services/user";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "models/user/user";
 
@@ -23,8 +30,24 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
 export const signIn = createAsyncThunk(
   "user/signIn",
-  async ({ email, password }: { email: string; password: string }) => {
+  async ({ email, password }: { email: Email; password: Password }) => {
     const response = await onSignInService({ email, password });
+    return response;
+  }
+);
+
+export const signUp = createAsyncThunk(
+  "user/sigUp",
+  async ({
+    email,
+    password,
+    username,
+  }: {
+    email: Email;
+    password: Password;
+    username: Username;
+  }) => {
+    const response = await onSignUpService({ email, password, username });
     return response;
   }
 );
@@ -38,6 +61,23 @@ export const updateUser = createAsyncThunk(
   "user/updateUser",
   async (user: User) => {
     const response = await onSaveUserService({ user });
+    return response;
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  "user/updatePassword",
+  async ({
+    oldPassword,
+    newPassword,
+  }: {
+    oldPassword: Password;
+    newPassword: Password;
+  }) => {
+    const response = await onUpdatePasswordService({
+      oldPassword,
+      newPassword,
+    });
     return response;
   }
 );
@@ -71,6 +111,17 @@ export const userSlice = createSlice({
         state.status = "failed";
       });
     builder
+      .addCase(signUp.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = action.payload;
+      })
+      .addCase(signUp.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
       .addCase(signOut.pending, (state) => {
         state.status = "loading";
       })
@@ -90,6 +141,16 @@ export const userSlice = createSlice({
         state.value = action.payload;
       })
       .addCase(updateUser.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(updatePassword.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updatePassword.fulfilled, (state) => {
+        state.status = "idle";
+      })
+      .addCase(updatePassword.rejected, (state) => {
         state.status = "failed";
       });
   },

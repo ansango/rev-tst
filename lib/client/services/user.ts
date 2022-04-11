@@ -1,6 +1,7 @@
 import {
   responseService,
   errorSaveDataAccountService,
+  errorUpdatePassword,
 } from "lib/constants/services";
 import { User } from "models/user/user";
 import toast from "react-hot-toast";
@@ -32,4 +33,29 @@ const onSaveUserService = async ({
   }
 };
 
-export { onSaveUserService };
+type onUpdatePasswordService = {
+  oldPassword: string;
+  newPassword: string;
+};
+
+const onUpdatePasswordService = async ({
+  oldPassword,
+  newPassword,
+}: onUpdatePasswordService): Promise<void> => {
+  try {
+    await fetcher("/api/user/password", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        oldPassword,
+        newPassword,
+      }),
+    });
+    toast.success(responseService.updatePassword);
+  } catch (err: any) {
+    toast.error(errorUpdatePassword[err.error] || errorUpdatePassword.default);
+    throw err;
+  }
+};
+
+export { onSaveUserService, onUpdatePasswordService };

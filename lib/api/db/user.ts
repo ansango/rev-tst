@@ -57,6 +57,24 @@ const findUserByEmail = async (db: Db, email: Email) => {
     .then((user) => user || null);
 };
 
+const updateUserPasswordByOldPassword = async (
+  db: Db,
+  userId: UserId,
+  oldPassword: Password,
+  newPassword: Password
+) => {
+  const user = await db.collection("users").findOne(new ObjectId(userId));
+  console.log(user);
+  if (!user) return null;
+  const matchedPasswords = await bcrypt.compare(oldPassword, user.password);
+  if (!matchedPasswords) return null;
+  const password = await bcrypt.hash(newPassword, 10);
+  await db
+    .collection("users")
+    .updateOne({ _id: new ObjectId(userId) }, { $set: { password } });
+  return true;
+};
+
 const updateUserAccountDataById = async (
   db: Db,
   userId: UserId,
@@ -130,5 +148,6 @@ export {
   findUserByUsername,
   findUserByEmail,
   updateUserAccountDataById,
+  updateUserPasswordByOldPassword,
   insertUser,
 };
