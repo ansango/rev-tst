@@ -7,13 +7,7 @@ import { User } from "models/user/user";
 import toast from "react-hot-toast";
 import fetcher from "../fetcher";
 
-type onSaveUserService = {
-  user: User;
-};
-
-const onSaveUserService = async ({
-  user,
-}: onSaveUserService): Promise<User> => {
+const onSaveUserService = async ({ user }: { user: User }): Promise<User> => {
   try {
     const response = await fetcher("/api/user", {
       method: "PATCH",
@@ -33,15 +27,13 @@ const onSaveUserService = async ({
   }
 };
 
-type onUpdatePasswordService = {
-  oldPassword: string;
-  newPassword: string;
-};
-
 const onUpdatePasswordService = async ({
   oldPassword,
   newPassword,
-}: onUpdatePasswordService): Promise<void> => {
+}: {
+  oldPassword: Password;
+  newPassword: Password;
+}): Promise<void> => {
   try {
     await fetcher("/api/user/password", {
       method: "PUT",
