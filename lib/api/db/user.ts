@@ -64,7 +64,6 @@ const updateUserPasswordByOldPassword = async (
   newPassword: Password
 ) => {
   const user = await db.collection("users").findOne(new ObjectId(userId));
-  console.log(user);
   if (!user) return null;
   const matchedPasswords = await bcrypt.compare(oldPassword, user.password);
   if (!matchedPasswords) return null;

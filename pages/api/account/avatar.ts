@@ -22,8 +22,6 @@ if (CLOUDINARY_CLOUD_NAME && CLOUDINARY_API_KEY && CLOUDINARY_API_SECRET) {
 handler.use(database, ...auth);
 
 handler.patch(upload.single("avatar"), async (req, res) => {
-  console.log("Hola");
-  console.log(req.file);
   if (!req.user) return res.status(401).json({ error: "Unauthorized" });
   if (!req.file)
     return res.status(400).json({ error: "You must attach an image" });
