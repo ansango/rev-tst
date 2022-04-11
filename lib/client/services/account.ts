@@ -32,4 +32,28 @@ const onSaveAccountService = async ({
   }
 };
 
-export { onSaveAccountService };
+type onUpdateAvatarAccountService = {
+  formData: FormData;
+};
+
+const onUpdateAvatarAccountService = async ({
+  formData,
+}: onUpdateAvatarAccountService): Promise<{ avatar: Url }> => {
+  try {
+    const response = await fetcher("/api/account/avatar", {
+      method: "PATCH",
+      body: formData,
+    });
+
+    toast.success(responseService.updateAvatarAccount);
+    return { avatar: response.avatar };
+  } catch (err: any) {
+    toast.error(
+      errorSaveDataAccountService[err.error] ||
+        errorSaveDataAccountService.default
+    );
+    throw err;
+  }
+};
+
+export { onSaveAccountService, onUpdateAvatarAccountService };

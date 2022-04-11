@@ -22,4 +22,15 @@ const updateAccountDataById = async (
     .then((account) => account || null);
 };
 
-export { findAccountByUserId, updateAccountDataById };
+const updateAvatarAccountById = async (
+  db: Db,
+  accountId: AccountId,
+  avatar: Url
+) => {
+  return db
+    .collection("accounts")
+    .findOneAndUpdate({ _id: new ObjectId(accountId) }, { $set: { avatar } })
+    .then((account) => account || null);
+};
+
+export { findAccountByUserId, updateAccountDataById, updateAvatarAccountById };

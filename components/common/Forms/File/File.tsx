@@ -43,7 +43,9 @@ const File: FC<FileProps> = ({ label, name, options, ...rest }) => {
         {...rest}
       />
       {errors[name] && (
-        <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors[name].message}</p>
+        <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+          {errors[name].message}
+        </p>
       )}
     </div>
   );

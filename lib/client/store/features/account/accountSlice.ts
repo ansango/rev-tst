@@ -1,5 +1,8 @@
 import fetcher from "@/lib-client/fetcher";
-import { onSaveAccountService } from "@/lib-client/services/account";
+import {
+  onSaveAccountService,
+  onUpdateAvatarAccountService,
+} from "@/lib-client/services/account";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Account } from "models/user/user";
 import type { AppState } from "../../index";
@@ -26,6 +29,14 @@ export const updateAccount = createAsyncThunk(
   "account/updateAccount",
   async (account: Account) => {
     const response = await onSaveAccountService({ account });
+    return response;
+  }
+);
+
+export const updateAvatar = createAsyncThunk(
+  "account/updateAvatar",
+  async (formData: FormData) => {
+    const response = await onUpdateAvatarAccountService({ formData });
     return response;
   }
 );
@@ -59,6 +70,19 @@ export const accountSlice = createSlice({
         state.value = action.payload;
       })
       .addCase(updateAccount.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(updateAvatar.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.status = "idle";
+        if (state.value) {
+          state.value.avatar = action.payload.avatar;
+        }
+      })
+      .addCase(updateAvatar.rejected, (state) => {
         state.status = "failed";
       });
   },

@@ -1,7 +1,10 @@
-import { selectAccount } from "@/lib-client/store/features/account/accountSlice";
+import {
+  selectAccount,
+  updateAvatar,
+} from "@/lib-client/store/features/account/accountSlice";
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
 
-import { useAppSelector } from "@/lib-client/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Avatar from "components/common/Avatar/Avatar";
 import Button from "components/common/Button/Button/Button";
 import { Form } from "components/common/Forms";
@@ -10,16 +13,24 @@ import { useCallback } from "react";
 
 const AvatarForm = () => {
   const account = useAppSelector(selectAccount);
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const onSubmit = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const onSubmit = useCallback(
+    async ({ avatar }) => {
+      if (avatar[0]) {
+        const formData = new FormData();
+        formData.append("avatar", avatar[0]);
+        dispatch(updateAvatar(formData));
+      }
+    },
+    [dispatch]
+  );
   return (
     <Form onSubmit={onSubmit}>
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
         <div className="flex space-x-3 items-center sm:space-x-6">
           <div>
-            <Avatar size="large" />
+            <Avatar size="large" imgUrl={account?.avatar} />
           </div>
           <div className="w-full space-y-5">
             <div>

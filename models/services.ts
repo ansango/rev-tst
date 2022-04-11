@@ -11,6 +11,7 @@ type ResponseService = {
   sigUp: string;
   saveUser: string;
   saveAccount: string;
+  updateAvatarAccount: string;
   default: string;
 };
 
