@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import { Date, Form, Input, TextArea } from "components/common/Forms";
 import { Account, User } from "models/user/user";
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 
 type AccountDataForm = {
   username: string;
@@ -26,7 +26,7 @@ type AccountDataForm = {
   zip: string;
 };
 
-const DataAccountForm = () => {
+const DataAccountForm: FC = () => {
   const user = useAppSelector(selectUser);
   const account = useAppSelector(selectAccount);
   const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const DataAccountForm = () => {
 
     [dispatch, user, account]
   );
-  if (!user || !account) return;
+  if (!user || !account) return <></>;
   return (
     <Form onSubmit={onSubmit}>
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
