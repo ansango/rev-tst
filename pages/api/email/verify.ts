@@ -1,0 +1,28 @@
+import { createToken } from "@/lib-api/db/token";
+import { sendMail, CONFIG as MAIL_CONFIG } from "@/lib-api/mail";
+import rawTemplateVerify from "@/lib-api/mail/rawTemplateVerify";
+import { auth, database } from "@/lib-api/middlewares";
+import { options } from "@/lib-api/nc";
+import nc from "next-connect";
+
+const handler = nc(options);
+handler.use(database, ...auth);
+
+handler.post(async (req, res) => {
+  if (!req.user) return res.status(401).json({ error: "User not found" });
+  const token = await createToken(req.db, {
+    creatorId: req.user._id,
+    type: "emailVerification",
+    expireAt: new Date(Date.now() + 1000 * 60 * 20),
+  });
+  await sendMail({
+    to: req.user.email,
+    from: MAIL_CONFIG.from,
+    subject: "[Robocooker] Verifica tu cuenta",
+    html: rawTemplateVerify({
+      tokenId: token._id.toString(),
+      username: req.user.username,
+    }),
+  });
+  res.status(204).end();
+});

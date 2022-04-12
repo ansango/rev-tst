@@ -96,6 +96,16 @@ const updateUserAccountDataById = async (
     .updateOne({ _id: new ObjectId(userId) }, { $set: { email, username } });
 };
 
+const updateUserEmailVerifiedById = async (db: Db, userId: UserId) => {
+  await db
+    .collection("users")
+    .updateOne(
+      { _id: new ObjectId(userId) },
+      { $set: { emailVerified: true } }
+    );
+  return true;
+};
+
 const insertUser = async (
   db: Db,
   {
@@ -161,5 +171,6 @@ export {
   updateUserAccountDataById,
   updateUserPasswordByOldPassword,
   updateUserPasswordRecovery,
+  updateUserEmailVerifiedById,
   insertUser,
 };
