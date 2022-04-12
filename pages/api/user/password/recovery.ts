@@ -33,7 +33,7 @@ handler.post(recoveryEmailValidation(), async (req, res) => {
       username: user.username,
     }),
   });
-  res.status(204).end();
+  return res.status(204).end();
 });
 
 handler.put(recoveryPasswordValidation(), async (req, res) => {
@@ -52,7 +52,7 @@ handler.put(recoveryPasswordValidation(), async (req, res) => {
       deletedToken.creatorId,
       req.body.newPassword
     );
-    res.status(204).end();
+    return res.status(204).end();
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }

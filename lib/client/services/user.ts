@@ -1,13 +1,10 @@
-import { findTokenByIdAndType, TokenType } from "@/lib-api/db/token";
 import {
   responseService,
   errorSaveDataAccountService,
   errorUpdatePassword,
-  errorTokenValidation,
+  errorVerifyEmail,
 } from "lib/constants/services";
 import { User } from "models/user/user";
-import { Db } from "mongodb";
-import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import fetcher from "../fetcher";
 
@@ -100,9 +97,23 @@ const onResetPasswordService = async ({
   }
 };
 
+const onVerifyEmailService = async (): Promise<boolean> => {
+  try {
+    await fetcher("/api/email/verify", {
+      method: "POST",
+    });
+    toast.success(responseService.verifyEmail);
+    return true;
+  } catch (err: any) {
+    toast.error(errorVerifyEmail[err.error] || errorUpdatePassword.default);
+    throw err;
+  }
+};
+
 export {
   onSaveUserService,
   onUpdatePasswordService,
   onRecoveryPasswordService,
   onResetPasswordService,
+  onVerifyEmailService,
 };

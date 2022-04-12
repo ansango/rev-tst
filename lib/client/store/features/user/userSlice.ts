@@ -9,6 +9,7 @@ import {
   onResetPasswordService,
   onSaveUserService,
   onUpdatePasswordService,
+  onVerifyEmailService,
 } from "@/lib-client/services/user";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "models/user/user";
@@ -108,6 +109,11 @@ export const resetPassword = createAsyncThunk(
   }
 );
 
+export const verifyEmail = createAsyncThunk("user/verifyEmail", async () => {
+  await onVerifyEmailService();
+  return null;
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -198,6 +204,16 @@ export const userSlice = createSlice({
       .addCase(resetPassword.rejected, (state) => {
         state.status = "failed";
       });
+    builder
+      .addCase(verifyEmail.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(verifyEmail.fulfilled, (state) => {
+        state.status = "idle";
+      });
+    builder.addCase(verifyEmail.rejected, (state) => {
+      state.status = "failed";
+    });
   },
 });
 

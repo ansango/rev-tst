@@ -114,6 +114,18 @@ const recoveryPasswordValidation = () => {
   });
 };
 
+const verifyEmailValidation = () => {
+  const { email } = RecoveryPasswordSchema;
+  return validateBody({
+    type: "object",
+    properties: {
+      email,
+    },
+    required: ["email"],
+    additionalProperties: false,
+  });
+};
+
 export {
   signUpValidation,
   updateUserValidation,
@@ -121,4 +133,5 @@ export {
   updatePasswordValidation,
   recoveryEmailValidation,
   recoveryPasswordValidation,
+  verifyEmailValidation,
 };

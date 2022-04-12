@@ -8,7 +8,7 @@ const handler = nc(options);
 handler.use(database, ...auth);
 
 handler.post(passport.authenticate("local"), async (req, res) => {
-  res.json({ user: req.user });
+  return res.json({ user: req.user });
 });
 
 export default handler;

@@ -16,6 +16,7 @@ type ResponseService = {
   updatePassword: string;
   recoveryPassword: string;
   resetPassword: string;
+  verifyEmail: string;
   default: string;
 };
 

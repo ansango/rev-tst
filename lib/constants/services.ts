@@ -9,6 +9,7 @@ const responseService: ResponseService = {
   updatePassword: "Contraseña actualizada",
   recoveryPassword: "Se ha enviado un correo para recuperar tu contraseña",
   resetPassword: "Contraseña actualizada",
+  verifyEmail: "Se ha enviado un correo para verificar tu cuenta",
   default: "Todo salió bien",
 };
 
@@ -56,6 +57,12 @@ const errorTokenValidation: ErrorService | any = {
   default: "Error al validar el token",
 };
 
+const errorVerifyEmail: ErrorService | any = {
+  400: "Error al verificar el email",
+  500: "Error del servidor",
+  default: "Error al verificar el email",
+};
+
 export {
   errorAuthService,
   responseService,
@@ -65,4 +72,5 @@ export {
   errorPasswordRecovery,
   errorResetPassword,
   errorTokenValidation,
+  errorVerifyEmail,
 };

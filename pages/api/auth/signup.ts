@@ -17,22 +17,19 @@ handler.post(signUpValidation(), ...auth, async (req, res) => {
   username = slug(req.body.username);
   email = normalizeEmail(req.body.email);
   if (!isEmail(email)) {
-    res
+    return res
       .status(400)
       .json({ error: { message: "The email you entered is invalid." } });
-    return;
   }
   if (await findUserByEmail(req.db, email)) {
-    res
+    return res
       .status(403)
       .json({ error: { message: "The email has already been used." } });
-    return;
   }
   if (await findUserByUsername(req.db, username)) {
-    res
+    return res
       .status(403)
       .json({ error: { message: "The username has already been taken." } });
-    return;
   }
   const user = await insertUser(req.db, {
     email,

@@ -97,13 +97,10 @@ const updateUserAccountDataById = async (
 };
 
 const updateUserEmailVerifiedById = async (db: Db, userId: UserId) => {
-  await db
+  return db
     .collection("users")
-    .updateOne(
-      { _id: new ObjectId(userId) },
-      { $set: { emailVerified: true } }
-    );
-  return true;
+    .updateOne({ _id: new ObjectId(userId) }, { $set: { emailVerified: true } })
+    .then((user) => console.log(user));
 };
 
 const insertUser = async (
