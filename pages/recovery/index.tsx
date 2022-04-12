@@ -4,7 +4,7 @@ import { Form, Input } from "components/common/Forms";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useCallback } from "react";
-const Forget: NextPage = () => {
+const Recovery: NextPage = () => {
   const onForget = useCallback(({ email }: { email: Email }) => {
     console.log(email);
   }, []);
@@ -46,4 +46,4 @@ const Forget: NextPage = () => {
   );
 };
 
-export default Forget;
+export default Recovery;

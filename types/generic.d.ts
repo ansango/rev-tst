@@ -7,6 +7,7 @@ type CategoryId = ObjectId | string;
 type CommentId = ObjectId | string;
 type CollectionId = ObjectId | string;
 type MessageId = ObjectId | string;
+type TokenId = ObjectId | string;
 
 type Name = string;
 type Content = string;
