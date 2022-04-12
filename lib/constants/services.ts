@@ -52,6 +52,10 @@ const errorResetPassword: ErrorService | any = {
   default: "Error al actualizar la contraseña",
 };
 
+const errorTokenValidation: ErrorService | any = {
+  default: "Error al validar el token",
+};
+
 export {
   errorAuthService,
   responseService,
@@ -60,4 +64,5 @@ export {
   errorUpdatePassword,
   errorPasswordRecovery,
   errorResetPassword,
+  errorTokenValidation,
 };

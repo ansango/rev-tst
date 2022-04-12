@@ -19,17 +19,26 @@ const Token: NextPage<{ tokenId: TokenId; valid: boolean }> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   await nc().use(database).run(context.req, context.res);
-  const tokenDoc = await findTokenByIdAndType(
-    context.req.db,
-    context.params.token,
-    "passwordReset"
-  );
-  return {
-    props: {
-      tokenId: context.params.token,
-      valid: !!tokenDoc,
-    },
-  };
+  try {
+    const tokenDoc = await findTokenByIdAndType(
+      context.req.db,
+      context.params.tokenId,
+      "passwordReset"
+    );
+    return {
+      props: {
+        tokenId: context.params.tokenId,
+        valid: !!tokenDoc,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        tokenId: context.params.tokenId,
+        valid: false,
+      },
+    };
+  }
 };
 
 export default Token;

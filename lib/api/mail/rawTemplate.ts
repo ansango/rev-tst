@@ -8,8 +8,8 @@ const rawTemplate = ({
   tokenId: TokenId;
 }) => `
       <div>
-        <p>Hello, @${username}</p>
-        <p>Please follow <a href="${WEB_URI}/forget-password/${tokenId}">this link</a> to reset your password.</p>
+        <p>Hola, @${username}!</p>
+        <p>Por favor accede <a href="${WEB_URI}/recovery/${tokenId}">aquí</a> para recuperar tu contraseña.</p>
       </div>
       `;
 

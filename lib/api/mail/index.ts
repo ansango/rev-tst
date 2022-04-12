@@ -31,6 +31,5 @@ export async function sendMail({
 }
 
 export const CONFIG = {
-  // TODO: Replace with the email you want to use to send email
   from: nodemailerConfig?.auth?.user,
 };

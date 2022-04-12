@@ -1,9 +1,12 @@
+import { findTokenByIdAndType, TokenType } from "@/lib-api/db/token";
 import {
   responseService,
   errorSaveDataAccountService,
   errorUpdatePassword,
+  errorTokenValidation,
 } from "lib/constants/services";
 import { User } from "models/user/user";
+import { Db } from "mongodb";
 import toast from "react-hot-toast";
 import fetcher from "../fetcher";
 
@@ -78,7 +81,7 @@ const onResetPasswordService = async ({
   newPassword: Password;
 }): Promise<void> => {
   try {
-    await fetcher(`/api/user/password/reset/${tokenId}`, {
+    await fetcher(`/api/user/password/recovery`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

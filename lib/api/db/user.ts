@@ -83,6 +83,7 @@ const updateUserPasswordRecovery = async (
   await db
     .collection("users")
     .updateOne({ _id: new ObjectId(userId) }, { $set: { password } });
+  return true;
 };
 
 const updateUserAccountDataById = async (

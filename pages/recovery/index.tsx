@@ -36,7 +36,7 @@ const Recovery: NextPage = () => {
               }}
             />
 
-            <Button label="Iniciar sesión" fullWidth type="submit" />
+            <Button label="Recuperar cuenta" fullWidth type="submit" />
             <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
               ¿Ya tienes una cuenta?
               <Link href="/signin">
