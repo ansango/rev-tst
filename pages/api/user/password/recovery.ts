@@ -4,6 +4,10 @@ import { CONFIG as MAIL_CONFIG, sendMail } from "@/lib-api/mail";
 import rawTemplate from "@/lib-api/mail/rawTemplate";
 import { database } from "@/lib-api/middlewares";
 import { options } from "@/lib-api/nc";
+import {
+  recoveryEmailValidation,
+  recoveryPasswordValidation,
+} from "@/lib-api/schemas/validations";
 
 import nc from "next-connect";
 import normalizeEmail from "validator/lib/normalizeEmail";
@@ -11,7 +15,7 @@ import normalizeEmail from "validator/lib/normalizeEmail";
 const handler = nc(options);
 handler.use(database);
 
-handler.post(async (req, res) => {
+handler.post(recoveryEmailValidation(), async (req, res) => {
   const email = normalizeEmail(req.body.email) || "";
   const user = await findUserByEmail(req.db, email);
   if (!user) return res.status(404).json({ error: "User not found" });
@@ -32,7 +36,7 @@ handler.post(async (req, res) => {
   res.status(204).end();
 });
 
-handler.put(async (req, res) => {
+handler.put(recoveryPasswordValidation(), async (req, res) => {
   const deletedToken = await findAndDeleteTokenByIdAndType(
     req.db,
     req.body.tokenId,

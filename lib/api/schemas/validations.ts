@@ -1,5 +1,10 @@
 import Ajv from "ajv";
-import { AccountSchema, PasswordSchema, UserSchema } from ".";
+import {
+  AccountSchema,
+  PasswordSchema,
+  RecoveryPasswordSchema,
+  UserSchema,
+} from ".";
 
 type Schema = {
   type: "object";
@@ -85,9 +90,35 @@ const updatePasswordValidation = () => {
   });
 };
 
+const recoveryEmailValidation = () => {
+  const { email } = RecoveryPasswordSchema;
+  return validateBody({
+    type: "object",
+    properties: {
+      email,
+    },
+    required: ["email"],
+    additionalProperties: false,
+  });
+};
+
+const recoveryPasswordValidation = () => {
+  const { newPassword } = RecoveryPasswordSchema;
+  return validateBody({
+    type: "object",
+    properties: {
+      newPassword,
+    },
+    required: ["newPassword"],
+    additionalProperties: true,
+  });
+};
+
 export {
   signUpValidation,
   updateUserValidation,
   updateAccountValidation,
   updatePasswordValidation,
+  recoveryEmailValidation,
+  recoveryPasswordValidation,
 };
