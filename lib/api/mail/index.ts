@@ -1,11 +1,5 @@
 import nodemailer from "nodemailer";
 
-const { NODEMAILER_CONFIG } = process.env;
-
-const nodemailerConfig = NODEMAILER_CONFIG ? JSON.parse(NODEMAILER_CONFIG) : {};
-
-const transporter = nodemailer.createTransport(nodemailerConfig);
-
 export async function sendMail({
   from,
   to,
@@ -17,6 +11,18 @@ export async function sendMail({
   subject: string;
   html: string;
 }) {
+  const transporter = nodemailer.createTransport({
+    port: 587,
+    host: process.env.NODEMAILER_HOST,
+    auth: {
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASS,
+    },
+    secure: false,
+    tls: {
+      ciphers: "SSLv3",
+    },
+  });
   try {
     await transporter.sendMail({
       from,
@@ -31,5 +37,5 @@ export async function sendMail({
 }
 
 export const CONFIG = {
-  from: nodemailerConfig?.auth?.user,
+  from: "robocooker@no-reply",
 };

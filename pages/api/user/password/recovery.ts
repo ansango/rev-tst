@@ -19,29 +19,20 @@ handler.post(recoveryEmailValidation(), async (req, res) => {
   const email = normalizeEmail(req.body.email) || "";
   const user = await findUserByEmail(req.db, email);
   if (!user) return res.status(404).json({ error: "User not found" });
-  try {
-    const token = await createToken(req.db, {
-      creatorId: user._id,
-      type: "passwordReset",
-      expireAt: new Date(Date.now() + 1000 * 60 * 20),
-    });
-    try {
-      await sendMail({
-        to: email,
-        from: MAIL_CONFIG.from,
-        subject: "[Robocooker] Cambia tu contraseña",
-        html: rawTemplate({
-          tokenId: token._id.toString(),
-          username: user.username,
-        }),
-      });
-    } catch (error) {
-      return res.status(500).json({ error: "Error nodemailer" });
-    }
-  } catch (error) {
-    return res.status(500).json({ error: "Error token" });
-  }
-
+  const token = await createToken(req.db, {
+    creatorId: user._id,
+    type: "passwordReset",
+    expireAt: new Date(Date.now() + 1000 * 60 * 20),
+  });
+  await sendMail({
+    to: email,
+    from: MAIL_CONFIG.from,
+    subject: "[Robocooker] Cambia tu contraseña",
+    html: rawTemplate({
+      tokenId: token._id.toString(),
+      username: user.username,
+    }),
+  });
   return res.status(204).end();
 });
 
