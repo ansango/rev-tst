@@ -50,4 +50,52 @@ const onUpdatePasswordService = async ({
   }
 };
 
-export { onSaveUserService, onUpdatePasswordService };
+const onRecoveryPasswordService = async ({
+  email,
+}: {
+  email: Email;
+}): Promise<void> => {
+  try {
+    await fetcher("/api/user/password/recovery", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+      }),
+    });
+    toast.success(responseService.recoveryPassword);
+  } catch (err: any) {
+    toast.error(errorUpdatePassword[err.error] || errorUpdatePassword.default);
+    throw err;
+  }
+};
+
+const onResetPasswordService = async ({
+  tokenId,
+  newPassword,
+}: {
+  tokenId: TokenId;
+  newPassword: Password;
+}): Promise<void> => {
+  try {
+    await fetcher(`/api/user/password/reset/${tokenId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tokenId,
+        newPassword,
+      }),
+    });
+    toast.success(responseService.resetPassword);
+  } catch (err: any) {
+    toast.error(errorUpdatePassword[err.error] || errorUpdatePassword.default);
+    throw err;
+  }
+};
+
+export {
+  onSaveUserService,
+  onUpdatePasswordService,
+  onRecoveryPasswordService,
+  onResetPasswordService,
+};

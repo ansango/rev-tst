@@ -74,6 +74,17 @@ const updateUserPasswordByOldPassword = async (
   return true;
 };
 
+const updateUserPasswordRecovery = async (
+  db: Db,
+  userId: UserId,
+  newPassword: Password
+) => {
+  const password = await bcrypt.hash(newPassword, 10);
+  await db
+    .collection("users")
+    .updateOne({ _id: new ObjectId(userId) }, { $set: { password } });
+};
+
 const updateUserAccountDataById = async (
   db: Db,
   userId: UserId,
@@ -148,5 +159,6 @@ export {
   findUserByEmail,
   updateUserAccountDataById,
   updateUserPasswordByOldPassword,
+  updateUserPasswordRecovery,
   insertUser,
 };

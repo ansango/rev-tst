@@ -1,5 +1,5 @@
 import { createToken, findAndDeleteTokenByIdAndType } from "@/lib-api/db/token";
-import { findUserByEmail } from "@/lib-api/db/user";
+import { findUserByEmail, updateUserPasswordRecovery } from "@/lib-api/db/user";
 import { CONFIG as MAIL_CONFIG, sendMail } from "@/lib-api/mail";
 import rawTemplate from "@/lib-api/mail/rawTemplate";
 import { database } from "@/lib-api/middlewares";
@@ -42,12 +42,12 @@ handler.put(async (req, res) => {
     res.status(403).end();
     return;
   }
-    
-//   await UNSAFE_updateUserPassword(
-//     req.db,
-//     deletedToken.creatorId,
-//     req.body.password
-//   );
+
+  await updateUserPasswordRecovery(
+    req.db,
+    deletedToken.creatorId,
+    req.body.password
+  );
   res.status(204).end();
 });
 

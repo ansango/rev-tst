@@ -5,6 +5,8 @@ import {
   onSignUpService,
 } from "@/lib-client/services/auth";
 import {
+  onRecoveryPasswordService,
+  onResetPasswordService,
   onSaveUserService,
   onUpdatePasswordService,
 } from "@/lib-client/services/user";
@@ -82,6 +84,28 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+export const recoveryPassword = createAsyncThunk(
+  "user/recoveryPassword",
+  async ({ email }: { email: Email }) => {
+    await onRecoveryPasswordService({ email });
+    return null;
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async ({
+    tokenId,
+    newPassword,
+  }: {
+    tokenId: TokenId;
+    newPassword: Password;
+  }) => {
+    await onResetPasswordService({ tokenId, newPassword });
+    return null;
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -151,6 +175,26 @@ export const userSlice = createSlice({
         state.status = "idle";
       })
       .addCase(updatePassword.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(recoveryPassword.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(recoveryPassword.fulfilled, (state) => {
+        state.status = "idle";
+      })
+      .addCase(recoveryPassword.rejected, (state) => {
+        state.status = "failed";
+      });
+    builder
+      .addCase(resetPassword.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.status = "idle";
+      })
+      .addCase(resetPassword.rejected, (state) => {
         state.status = "failed";
       });
   },

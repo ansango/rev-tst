@@ -1,3 +1,5 @@
+import { recoveryPassword } from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
 import { Form, Input } from "components/common/Forms";
@@ -5,9 +7,13 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useCallback } from "react";
 const Recovery: NextPage = () => {
-  const onForget = useCallback(({ email }: { email: Email }) => {
-    console.log(email);
-  }, []);
+  const dispatch = useAppDispatch();
+  const onForget = useCallback(
+    ({ email }: { email: Email }) => {
+      dispatch(recoveryPassword({ email }));
+    },
+    [dispatch]
+  );
 
   return (
     <GreyContainer>

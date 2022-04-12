@@ -6,10 +6,13 @@ import RecoveryForm from "components/recovery/RecoveryForm";
 import { GetServerSideProps, NextPage } from "next";
 import nc from "next-connect";
 
-const Token: NextPage<{ token: any; valid: boolean }> = ({ valid, token }) => {
+const Token: NextPage<{ tokenId: TokenId; valid: boolean }> = ({
+  valid,
+  tokenId,
+}) => {
   return (
     <GreyContainer>
-      {valid ? <RecoveryForm token={token} /> : <BadLink />}
+      {valid ? <RecoveryForm tokenId={tokenId} /> : <BadLink />}
     </GreyContainer>
   );
 };
@@ -23,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   );
   return {
     props: {
-      token: context.params.token,
+      tokenId: context.params.token,
       valid: !!tokenDoc,
     },
   };

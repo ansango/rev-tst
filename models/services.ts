@@ -2,6 +2,7 @@ type ErrorService = {
   400: string;
   401: string;
   403: string;
+  404: string;
   500: string;
   default: string;
 };
@@ -13,6 +14,8 @@ type ResponseService = {
   saveAccount: string;
   updateAvatarAccount: string;
   updatePassword: string;
+  recoveryPassword: string;
+  resetPassword: string;
   default: string;
 };
 

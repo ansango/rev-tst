@@ -1,18 +1,17 @@
+import { resetPassword } from "@/lib-client/store/features/user/userSlice";
+import { useAppDispatch } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import { Form, Input } from "components/common/Forms";
 import Link from "next/link";
 import { FC, useCallback } from "react";
 
-const RecoveryForm: FC<{ token: any }> = ({ token }) => {
+const RecoveryForm: FC<{ tokenId: TokenId }> = ({ tokenId }) => {
+  const dispatch = useAppDispatch();
   const onRecovery = useCallback(
     ({ newPassword }: { newPassword: Password }) => {
-      const data = {
-        token,
-        newPassword,
-      };
-      console.log(data);
+      dispatch(resetPassword({ tokenId, newPassword }));
     },
-    [token]
+    [dispatch, tokenId]
   );
   return (
     <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
