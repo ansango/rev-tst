@@ -7,6 +7,7 @@ import {
 } from "lib/constants/services";
 import { User } from "models/user/user";
 import { Db } from "mongodb";
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import fetcher from "../fetcher";
 
@@ -76,9 +77,11 @@ const onRecoveryPasswordService = async ({
 const onResetPasswordService = async ({
   tokenId,
   newPassword,
+  redirect,
 }: {
   tokenId: TokenId;
   newPassword: Password;
+  redirect: () => Promise<boolean>;
 }): Promise<void> => {
   try {
     await fetcher(`/api/user/password/recovery`, {
@@ -90,6 +93,7 @@ const onResetPasswordService = async ({
       }),
     });
     toast.success(responseService.resetPassword);
+    redirect();
   } catch (err: any) {
     toast.error(errorUpdatePassword[err.error] || errorUpdatePassword.default);
     throw err;

@@ -97,11 +97,13 @@ export const resetPassword = createAsyncThunk(
   async ({
     tokenId,
     newPassword,
+    redirect,
   }: {
     tokenId: TokenId;
     newPassword: Password;
+    redirect: () => Promise<boolean>;
   }) => {
-    await onResetPasswordService({ tokenId, newPassword });
+    await onResetPasswordService({ tokenId, newPassword, redirect });
     return null;
   }
 );
@@ -109,7 +111,6 @@ export const resetPassword = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {},
   extraReducers: (builder) => {
     builder

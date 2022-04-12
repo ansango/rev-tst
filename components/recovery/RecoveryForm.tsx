@@ -2,16 +2,18 @@ import { resetPassword } from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import { Form, Input } from "components/common/Forms";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, useCallback } from "react";
 
 const RecoveryForm: FC<{ tokenId: TokenId }> = ({ tokenId }) => {
   const dispatch = useAppDispatch();
+  const { replace } = useRouter();
   const onRecovery = useCallback(
     ({ newPassword }: { newPassword: Password }) => {
-      dispatch(resetPassword({ tokenId, newPassword }));
+      const redirect = () => replace("/signin");
+      dispatch(resetPassword({ tokenId, newPassword, redirect }));
     },
-    [dispatch, tokenId]
+    [dispatch, tokenId, replace]
   );
   return (
     <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
@@ -33,15 +35,7 @@ const RecoveryForm: FC<{ tokenId: TokenId }> = ({ tokenId }) => {
             }}
           />
 
-          <Button label="Iniciar sesión" fullWidth type="submit" />
-
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            <Link href="/signin">
-              <a className="text-blue-700 hover:underline dark:text-blue-500 ml-1">
-                Inicia sesión
-              </a>
-            </Link>
-          </p>
+          <Button label="Resetear" fullWidth type="submit" />
         </div>
       </Form>
     </div>
