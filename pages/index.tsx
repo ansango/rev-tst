@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const account = useAppSelector(selectAccount);
 
   return (
-    <BlockContainer>
+    <div>
       {user && (
         <div>
           <p>{account?.firstName}</p>
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           <p>{user._id}</p>
         </div>
       )}
-    </BlockContainer>
+    </div>
   );
 };
 
