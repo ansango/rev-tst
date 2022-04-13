@@ -7,7 +7,7 @@ import Motion from "./Motion";
 const MainLayout: FC = ({ children }) => {
   const { route } = useRouter();
   return (
-    <div className="flex flex-col justify-between h-screen bg-white">
+    <div className="bg-white">
       <Navbar />
       <Motion route={route}>
         <main className="h-full">{children}</main>
