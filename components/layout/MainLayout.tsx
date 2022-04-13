@@ -10,7 +10,7 @@ const MainLayout: FC = ({ children }) => {
     <div className="flex flex-col justify-between h-screen bg-white">
       <Navbar />
       <Motion route={route}>
-        <main>{children}</main>
+        <main className="h-full">{children}</main>
       </Motion>
       <Footer />
     </div>

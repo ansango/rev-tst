@@ -8,6 +8,7 @@ type propTypes = {
 const Motion: FC<propTypes> = ({ children, route }) => {
   return (
     <motion.div
+      className="h-full"
       key={route}
       initial="initial"
       animate="animate"
