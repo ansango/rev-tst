@@ -27,7 +27,7 @@ const SignIn: NextPage = () => {
       <div className="p-4 max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
         <Form onSubmit={onSignIn}>
           <div className="space-y-5">
-            <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+            <h5 className="text-xl font-medium text-gray-900">
               Inicia sesión
             </h5>
             <Input
@@ -52,16 +52,16 @@ const SignIn: NextPage = () => {
             />
             <p>
               <Link href="/recovery">
-                <a className="text-blue-700 hover:underline dark:text-blue-500 text-sm">
+                <a className="text-blue-700 hover:underline text-sm">
                   ¿Olvidaste tu contraseña?
                 </a>
               </Link>
             </p>
             <Button label="Iniciar sesión" fullWidth type="submit" />
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
+            <p className="text-sm font-medium text-gray-500">
               ¿No tienes cuenta?
               <Link href="/signup">
-                <a className="text-blue-700 hover:underline dark:text-blue-500 ml-1">
+                <a className="text-blue-700 hover:underline ml-1">
                   Crear cuenta
                 </a>
               </Link>

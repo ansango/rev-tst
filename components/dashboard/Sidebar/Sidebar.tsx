@@ -17,7 +17,7 @@ const Sidebar = () => {
                   <Icon
                     icon={icon}
                     kind="solid"
-                    classIcon="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    classIcon="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                   />
                   <span className="ml-3">{label}</span>
                 </a>

@@ -16,7 +16,7 @@ const ResetPasswordForm = () => {
   return (
     <Form onSubmit={onSubmit}>
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
-        <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+        <h5 className="text-xl font-medium text-gray-900">
           Cambio de contraseña
         </h5>
         <Input label="Contraseña actual" type="password" name="oldPassword" />

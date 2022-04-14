@@ -31,8 +31,8 @@ const Switch: FC<SwitchProps> = ({ label, name, options, ...rest }) => {
         <div
           className={
             isActive
-              ? "focus:ring-0 w-11 h-6 bg-blue-600 rounded-full border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
-              : "focus:ring-0 w-11 h-6 bg-gray-200 rounded-full border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+              ? "focus:ring-0 w-11 h-6 bg-blue-600 rounded-full border border-gray-200"
+              : "focus:ring-0 w-11 h-6 bg-gray-200 rounded-full border border-gray-200"
           }
         />
         <input
@@ -43,7 +43,7 @@ const Switch: FC<SwitchProps> = ({ label, name, options, ...rest }) => {
           {...rest}
         />
       </span>
-      <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{label}</span>
+      <span className="ml-3 text-sm font-medium text-gray-900">{label}</span>
     </label>
   );
 };
