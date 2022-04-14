@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "../Icons/Logo";
+import { Logo } from "components/common/Icons";
 import { legalRoutes, mainRoutes } from "./routes";
 import SocialIcons from "./SocialIcons";
 

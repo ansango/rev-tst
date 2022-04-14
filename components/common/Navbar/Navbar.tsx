@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Logo from "../Icons/Logo";
+import { Logo } from "components/common/Icons";
 import NavMobile from "./NavMobile";
 import SignIn from "./SignIn";
 import AddRecipe from "./AddRecipe";
@@ -9,7 +9,6 @@ import { useAppSelector } from "@/lib-client/store/hooks";
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
 
 const Navbar: FC = () => {
-  const user = useAppSelector(selectUser);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -18,13 +17,9 @@ const Navbar: FC = () => {
         <NavDesktop />
       </div>
       <div className="navbar-end">
-        {user && (
-          <>
-            <AddRecipe />
-            <User />
-          </>
-        )}
-        {!user && <SignIn />}
+        <AddRecipe />
+        <User />
+        <SignIn />
       </div>
     </div>
   );
