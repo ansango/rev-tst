@@ -5,15 +5,16 @@ type Recipe = {
   name: Name;
   description: Content;
   img: Url;
-  categories: Category[];
+  categories: CategoryName[];
   servings: Servings;
   duration: Duration;
-  blender: Blender;
+  blender: BlenderName;
   ingredients: Ingredient[];
   steps: Step[];
   likes: UserId[];
   comments: CommentId[];
   created: Date;
+  author: UserId;
 };
 
 type Step = {
@@ -25,13 +26,6 @@ type Ingredient = {
   name: Name;
   unit: Unit;
   measure: Measure;
-};
-
-type Category = {
-  _id: CategoryId;
-  name: Name;
-  description: Content;
-  img: Url;
 };
 
 export { type Recipe };

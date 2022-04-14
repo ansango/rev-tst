@@ -4,6 +4,7 @@ import imgHero from "public/Hero.avif";
 import { Form, Input } from "components/common/Forms";
 import Button from "components/common/Button/Button/Button";
 import { useRouter } from "next/router";
+
 const Hero: FC = () => {
   const { replace } = useRouter();
   return (

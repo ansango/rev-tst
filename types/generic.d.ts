@@ -1,3 +1,5 @@
+// Ids
+
 type UserId = ObjectId | string;
 type AccountId = ObjectId | string;
 type ChatId = ObjectId | string;
@@ -9,8 +11,12 @@ type CollectionId = ObjectId | string;
 type MessageId = ObjectId | string;
 type TokenId = ObjectId | string;
 
+// Generics
+
 type Name = string;
 type Content = string;
+
+// User & Account
 
 type Username = string;
 type FirstName = string;
@@ -20,15 +26,32 @@ type Url = string;
 type Password = string;
 type Phone = string;
 type Birthday = string;
-
-type Company = string;
 type City = string;
 type Zip = string;
 type Country = string;
+
+type CompanyName = Name;
+// Recipe
 
 type Servings = number;
 type Duration = number;
 type Position = number;
 
+// Category
+
+type CategoryName = Name;
+
+// Ingredient
+
 type Unit = number;
 type Measure = "gr" | "portion";
+
+// Blender
+
+type BlenderName =
+  | "Thermomix"
+  | "Mambo"
+  | "KCook"
+  | "Maxichef"
+  | "MyCook"
+  | "Monsieur Cusine";

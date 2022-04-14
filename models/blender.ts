@@ -1,7 +1,7 @@
 type Blender = {
   _id: BlenderId;
-  name: Name;
-  company: Company;
+  name: BlenderName;
+  company: CompanyName;
 };
 
 export { type Blender };
