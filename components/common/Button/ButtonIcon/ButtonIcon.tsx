@@ -3,7 +3,7 @@
  */
 
 import { FC } from "react";
-import Icon from "../../Icons/Icon/Icon";
+import Icon from "../../Icons/Icon";
 import ButtonIconProps from "./ButtonIconProps";
 
 import * as cn from "./ButtonIconStyles";

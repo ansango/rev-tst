@@ -1,4 +1,4 @@
-import Icon from "components/common/Icons/Icon/Icon";
+import Icon from "components/common/Icons/Icon";
 import { FC } from "react";
 import ButtonProps from "./ButtonProps";
 
@@ -37,9 +37,7 @@ const Button: FC<ButtonProps> = ({
       onClick={action}
       {...props}
     >
-      {icon && (
-        <Icon icon={icon} size={reSize} classIcon={classIcon} kind={kind} />
-      )}
+      {icon && <Icon icon={icon} kind={kind} />}
       <span className={iconLabel}>{label}</span>
     </button>
   );

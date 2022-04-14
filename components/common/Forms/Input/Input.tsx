@@ -2,7 +2,7 @@
  * ?Input Component
  */
 
-import Icon from "components/common/Icons/Icon/Icon";
+import Icon from "components/common/Icons/Icon";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import InputProps from "./InputProps";
@@ -75,7 +75,7 @@ const Input: FC<InputProps> = ({
               <Icon
                 icon={iconName}
                 kind={iconKind}
-                classIcon="w-5 h-5 text-gray-500"
+                className="w-5 h-5 text-gray-500"
               />
             </div>
             <input

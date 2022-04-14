@@ -6,13 +6,13 @@ import { routes } from "./routes";
 const NavDesktop = () => {
   const { pathname } = useRouter();
   return (
-    <ul className="flex flex-col mt-4 md:flex-row md:mt-0 md:text-sm md:font-medium">
+    <ul className="hidden w-full md:flex md:w-auto ml-3">
       {routes.map(({ label, path }) => {
         const cn = routeActive(pathname, path)
-          ? "block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
-          : "block text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0";
+          ? "btn btn-link btn-sm normal-case"
+          : "btn btn-link btn-sm normal-case text-gray-600";
         return (
-          <li key={path} className="py-2 pr-4 pl-3">
+          <li key={path} className="">
             <Link href={path}>
               <a className={cn}>{label}</a>
             </Link>

@@ -4,7 +4,7 @@
 
 import { FC, useState } from "react";
 import ButtonIcon from "../Button/ButtonIcon/ButtonIcon";
-import Icon from "../Icons/Icon/Icon";
+import Icon from "../Icons/Icon";
 import AlertProps from "./AlertProps";
 
 import * as cn from "./AlertStyles";

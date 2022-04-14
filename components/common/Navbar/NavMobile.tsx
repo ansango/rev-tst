@@ -2,25 +2,32 @@ import { routeActive } from "@/lib-utils/router";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC } from "react";
+import Icon from "../Icons/Icon";
 import { routes } from "./routes";
 
 const NavMobile: FC = () => {
   const { pathname } = useRouter();
   return (
-    <ul className="mt-4 md:hidden">
-      {routes.map(({ label, path }) => {
-        const cn = routeActive(pathname, path)
-          ? "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
-          : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0";
-        return (
-          <li key={path}>
-            <Link href={path}>
-              <a className={cn}>{label}</a>
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="dropdown md:hidden">
+      <label tabIndex={0} className="btn btn-ghost btn-circle">
+        <Icon icon="MenuAlt2Icon" kind="outline" className="w-5 h-5" />
+      </label>
+      <ul
+        tabIndex={0}
+        className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        {routes.map(({ label, path }) => {
+          const cn = routeActive(pathname, path) ? "bg-primary text-white" : "";
+          return (
+            <li key={path}>
+              <Link href={path}>
+                <a className={cn}>{label}</a>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

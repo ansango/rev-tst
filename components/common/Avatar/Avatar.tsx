@@ -7,6 +7,8 @@ import { FC } from "react";
 import Image from "next/image";
 import * as cn from "./AvatarStyles";
 import AvatarProps, { SizeProps } from "./AvatarProps";
+import { useAppSelector } from "@/lib-client/store/hooks";
+import { selectAccount } from "@/lib-client/store/features/account/accountSlice";
 
 /**
  * Show image for user or products
@@ -47,13 +49,11 @@ const Full = ({ size, imgUrl }: { size: SizeProps; imgUrl: string }) => {
   );
 };
 
-const Avatar: FC<AvatarProps> = ({ imgUrl, size }) => {
-  return (
-    <>
-      {imgUrl && <Full size={size} imgUrl={imgUrl} />}
-      {!imgUrl && <Blank size={size} />}
-    </>
-  );
+const Avatar: FC<AvatarProps> = ({ size }) => {
+  const account = useAppSelector(selectAccount);
+  const isAvatar = account?.avatar;
+  if (!isAvatar) return <Blank size={size} />;
+  return <Full size={size} imgUrl={isAvatar} />;
 };
 
 export default Avatar;

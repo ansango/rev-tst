@@ -1,4 +1,4 @@
-import IconSimple from "../Icons/IconSimple/IconSimple";
+import IconSimple from "../Icons/IconSimple";
 
 const SocialIcons = () => {
   return (

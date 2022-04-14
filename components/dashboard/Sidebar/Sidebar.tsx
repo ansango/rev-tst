@@ -1,4 +1,4 @@
-import Icon from "components/common/Icons/Icon/Icon";
+import Icon from "components/common/Icons/Icon";
 import Link from "next/link";
 import { routes } from "./routes";
 
@@ -14,11 +14,7 @@ const Sidebar = () => {
             <li key={path}>
               <Link href={path}>
                 <a className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
-                  <Icon
-                    icon={icon}
-                    kind="solid"
-                    classIcon="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
-                  />
+                  <Icon icon={icon} kind="solid" />
                   <span className="ml-3">{label}</span>
                 </a>
               </Link>
