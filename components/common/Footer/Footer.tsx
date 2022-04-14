@@ -2,8 +2,58 @@ import Link from "next/link";
 import { Logo } from "components/common/Icons";
 import { legalRoutes, mainRoutes } from "./routes";
 import SocialIcons from "./SocialIcons";
+import { FC } from "react";
 
-const Footer = () => {
+const Footer: FC = () => {
+  return (
+    <footer className="lg:container mx-auto p-10 bg-base text-base-content">
+      <div className="footer">
+        <div className="space-y-2">
+          <Logo className="fill-current w-12 h-12" />
+          <p className="max-w-xs">
+            Robocooker.
+            <br />
+            La comunidad que te permite crear y compartir recetas para tu robot
+            de cocina favorito. Cocina, comparte y disfruta!
+          </p>
+        </div>
+        <div>
+          <span className="footer-title">Robocooker</span>
+          {mainRoutes.map(({ name, path }) => (
+            <Link key={path} href={path}>
+              <a className="link link-hover">{name}</a>
+            </Link>
+          ))}
+        </div>
+        <div>
+          <span className="footer-title">Legal</span>
+          {legalRoutes.map(({ name, path }) => (
+            <Link key={path} href={path}>
+              <a className="link link-hover">{name}</a>
+            </Link>
+          ))}
+        </div>
+        <div>
+          <span className="footer-title">Soporte</span>
+          <Link href="/contact">
+            <a className="hover:underline">Contacto</a>
+          </Link>
+          <Link href="/sponsors">
+            <a className="hover:underline">Patrocinadores</a>
+          </Link>
+        </div>
+      </div>
+      <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+      <div className="sm:flex sm:items-center sm:justify-center">
+        <span className="text-gray-500 sm:text-center text-xs md:text-sm">
+          © 2022 Robocooker. Todos los derechos reservados.
+        </span>
+      </div>
+    </footer>
+  );
+};
+
+const Footera = () => {
   return (
     <footer className="p-4 bg-white text-gray-600 space-y-12 text-sm">
       <div className="lg:container mx-auto">

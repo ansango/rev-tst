@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <Provider store={store}>
       <WrapperLayout>
-        <Component {...pageProps} />
+        <Component {...pageProps}/>
         <Toaster />
       </WrapperLayout>
     </Provider>

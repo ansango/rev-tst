@@ -7,13 +7,14 @@ import NavDesktop from "./NavDesktop";
 import User from "./User";
 import { useAppSelector } from "@/lib-client/store/hooks";
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
+import Brand from "./Brand";
 
 const Navbar: FC = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <NavMobile />
-        <Logo />
+        <Brand />
         <NavDesktop />
       </div>
       <div className="navbar-end">
