@@ -11,7 +11,13 @@ import RadioPropsGroup from "./RadioGroupProps";
  * Description of Radio component displayed in Storybook
  */
 
-const RadioGroup: FC<RadioPropsGroup> = ({ label, name, data, options, ...rest }) => {
+const RadioGroup: FC<RadioPropsGroup> = ({
+  label,
+  name,
+  data,
+  options,
+  ...rest
+}) => {
   const {
     register,
     formState: { errors },
@@ -23,8 +29,8 @@ const RadioGroup: FC<RadioPropsGroup> = ({ label, name, data, options, ...rest }
           htmlFor={name}
           className={
             !errors[name]
-              ? "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              : "block mb-2 text-sm font-medium text-red-700 dark:text-red-500"
+              ? "block mb-2 text-sm font-medium text-gray-900"
+              : "block mb-2 text-sm font-medium text-red-700"
           }
         >
           {label}
@@ -37,8 +43,8 @@ const RadioGroup: FC<RadioPropsGroup> = ({ label, name, data, options, ...rest }
             value={value}
             className={
               !errors[name]
-                ? "w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-                : "w-4 h-4 border-red-300 focus:ring-2 focus:ring-red-300 dark:focus:ring-red-600 dark:focus:bg-red-600 dark:bg-gray-700 dark:border-gray-600"
+                ? "w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+                : "w-4 h-4 border-red-300 focus:ring-2 focus:ring-red-300"
             }
             {...register(name, { ...options })}
             {...rest}
@@ -47,8 +53,8 @@ const RadioGroup: FC<RadioPropsGroup> = ({ label, name, data, options, ...rest }
             htmlFor={value}
             className={
               !errors[name]
-                ? "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                : "ml-2 text-sm font-medium text-red-700 dark:text-red-500"
+                ? "ml-2 text-sm font-medium text-gray-900"
+                : "ml-2 text-sm font-medium text-red-700"
             }
           >
             {lab}
@@ -56,7 +62,7 @@ const RadioGroup: FC<RadioPropsGroup> = ({ label, name, data, options, ...rest }
         </div>
       ))}
       {errors[name] && (
-        <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors[name].message}</p>
+        <p className="mt-2 text-sm text-red-600">{errors[name].message}</p>
       )}
     </fieldset>
   );
