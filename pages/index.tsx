@@ -46,14 +46,24 @@ const Home: NextPage = () => {
             <p className="text-lg md:text-xl">
               Miles de recetas para tu robot de cocina
             </p>
-          </div>
-          <div>
-            {/* <Form onSubmit={(e) => console.log(e)}>
-              <div className="">
-                <Input name="Search" type="text" />
-                <Button label="Buscar" />
-              </div>
-            </Form> */}
+            <div>
+              <Form onSubmit={() => {}}>
+                <div className="max-w-sm px-5 mx-auto md:flex md:items-center md:space-x-5">
+                  <Input
+                    name="search"
+                    type="text"
+                    placeholder="Introduce una receta"
+                    icon
+                    iconName="SearchIcon"
+                    iconKind="solid"
+                  />
+
+                  <div className="mb-3">
+                    <Button type="submit" label="Buscar" fullWidth />
+                  </div>
+                </div>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
