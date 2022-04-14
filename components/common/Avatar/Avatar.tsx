@@ -13,7 +13,7 @@ import BlankAvatar from "./BlankAvatar";
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
 
 type AvatarProps = {
-  size: "small" | "base" | "large" | "xlarge";
+  size: "xs" | "sm" | "md" | "lg";
   imgUrl?: string | null;
 };
 

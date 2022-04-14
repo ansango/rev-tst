@@ -25,7 +25,7 @@ const User: FC = () => {
       {user && (
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <Avatar size="small" />
+            <Avatar size="xs" />
           </label>
           <ul
             tabIndex={0}

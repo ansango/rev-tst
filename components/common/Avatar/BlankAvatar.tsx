@@ -1,22 +1,22 @@
 import { FC } from "react";
 
 type BlankAvatar = {
-  size: "small" | "base" | "large" | "xlarge";
+  size: "xs" | "sm" | "md" | "lg";
   username: Username;
 };
 
 enum textBlank {
-  small = "text-xs",
-  base = "",
-  large = "text-xl",
-  xlarge = "text-3xl",
+  xs = "text-xs",
+  sm = "",
+  md = "text-xl",
+  lg = "text-3xl",
 }
 
 enum sizeBlank {
-  small = "w-8",
-  base = "w-12",
-  large = "w-16",
-  xlarge = "w-24",
+  xs = "w-8",
+  sm = "w-12",
+  md = "w-16",
+  lg = "w-24",
 }
 
 const BlankAvatar: FC<BlankAvatar> = ({ size, username }) => {

@@ -17,11 +17,11 @@ const Hero: FC = () => {
         className="object-center object-cover pointer-events-none"
       />
       <div className="relative z-10 w-full h-full flex items-center">
-        <div className="text-center w-full text-white p-5 space-y-5">
-          <h1 className="text-5xl font-extrabold sm:text-5xl xl:text-6xl">
+        <div className="text-center w-full p-5 space-y-5">
+          <h1 className="text-5xl font-extrabold sm:text-5xl xl:text-6xl text-white">
             ¿Que quieres comer hoy?
           </h1>
-          <p className="text-lg md:text-xl">
+          <p className="text-lg md:text-xl text-white">
             Miles de recetas para tu robot de cocina
           </p>
           <div>
@@ -32,15 +32,16 @@ const Hero: FC = () => {
                 <Input
                   name="search"
                   type="text"
+                  kind="primary"
                   placeholder="Introduce una receta"
-                  icon
-                  iconName="SearchIcon"
-                  iconKind="solid"
+                  icon={{
+                    name: "SearchIcon",
+                    kind: "solid",
+                  }}
                 />
-
-                <div className="mb-3">
-                  <Button type="submit" label="Buscar" fullWidth />
-                </div>
+                <button className="btn btn-primary normal-case" type="submit">
+                  Buscar
+                </button>
               </div>
             </Form>
           </div>

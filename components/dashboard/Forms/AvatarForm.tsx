@@ -32,7 +32,7 @@ const AvatarForm = () => {
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 space-y-5">
         <div className="grid grid-cols-12 gap-5">
           <div className="col-span-3">
-            <Avatar size="large" imgUrl={account?.avatar} />
+            <Avatar size="md" imgUrl={account?.avatar} />
           </div>
           <div className="col-span-9">
             {account?.firstName && (

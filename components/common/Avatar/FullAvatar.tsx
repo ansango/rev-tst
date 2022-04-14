@@ -2,15 +2,15 @@ import Image from "next/image";
 import { FC } from "react";
 
 type FullAvatar = {
-  size: "small" | "base" | "large" | "xlarge";
+  size: "xs" | "sm" | "md" | "lg";
   imgUrl: string;
 };
 
 enum sizeFull {
-  small = "w-8",
-  base = "w-16",
-  large = "w-20",
-  xlarge = "w-32",
+  xs = "w-8",
+  sm = "w-16",
+  md = "w-20",
+  lg = "w-32",
 }
 
 const FullAvatar: FC<FullAvatar> = ({ size, imgUrl }) => {

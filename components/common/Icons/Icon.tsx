@@ -2,7 +2,7 @@ import * as SolidIcons from "@heroicons/react/solid";
 import * as OutlineIcons from "@heroicons/react/outline";
 import { FC } from "react";
 
-type IconProps = {
+export type IconProps = {
   icon: keyof typeof SolidIcons | keyof typeof OutlineIcons;
   kind: "solid" | "outline";
   className?: string;
