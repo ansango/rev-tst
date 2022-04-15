@@ -10,6 +10,7 @@ import { routeActive } from "@/lib-utils/router";
 import Link from "next/link";
 import Brand from "components/common/Navbar/Brand";
 import { routes, routesDashboard } from "components/common/Navbar/routes";
+import { Icon } from "components/common/Icons";
 
 const DashboardLayout: FC = ({ children }) => {
   const user = useAppSelector(selectUser);
@@ -47,17 +48,27 @@ const DashboardLayout: FC = ({ children }) => {
             <div className="flex flex-col w-full">
               <div tabIndex={0} className="collapse collapse-arrow bg-base-100">
                 <div className="collapse-title text-md font-medium">
-                  Navegación
+                  <span className="flex items-center space-x-3">
+                    <Icon icon="MapIcon" kind="outline" className="w-5 h-5" />
+                    <a>Navegación</a>
+                  </span>
                 </div>
                 <div className="collapse-content">
-                  {routes.map(({ label, path }) => {
+                  {routes.map(({ label, path, icon }) => {
                     const cn = routeActive(pathname, path)
                       ? "bg-primary text-white"
                       : "";
                     return (
                       <li key={path}>
                         <Link href={path}>
-                          <a className={cn}>{label}</a>
+                          <a className={cn}>
+                            <Icon
+                              icon={icon}
+                              kind="outline"
+                              className="w-5 h-5"
+                            />
+                            {label}
+                          </a>
                         </Link>
                       </li>
                     );
@@ -65,14 +76,17 @@ const DashboardLayout: FC = ({ children }) => {
                 </div>
               </div>
               <div className="divider my-3"></div>
-              {routesDashboard.map(({ label, path }) => {
+              {routesDashboard.map(({ label, path, icon }) => {
                 const cn = routeActive(pathname, path)
                   ? "bg-primary text-white"
                   : "";
                 return (
                   <li key={path}>
                     <Link href={path}>
-                      <a className={cn}>{label}</a>
+                      <a className={cn}>
+                        <Icon icon={icon} kind="outline" className="w-5 h-5" />
+                        {label}
+                      </a>
                     </Link>
                   </li>
                 );

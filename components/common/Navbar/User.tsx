@@ -8,11 +8,12 @@ import {
 } from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import { routeActive } from "@/lib-utils/router";
-import { routes } from "components/dashboard/Sidebar/routes";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useCallback } from "react";
 import Avatar from "../Avatar/Avatar";
+import { Icon } from "../Icons";
 import { routesDashboard } from "./routes";
 
 const User: FC = () => {
@@ -36,20 +37,26 @@ const User: FC = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {routesDashboard.map(({ label, path }) => {
+            {routesDashboard.map(({ label, path, icon }) => {
               const cn = routeActive(pathname, path)
                 ? "bg-primary text-white"
                 : "";
               return (
                 <li key={path}>
                   <Link href={path}>
-                    <a className={cn}>{label}</a>
+                    <a className={cn}>
+                      <Icon kind="outline" icon={icon} className="w-4 h-4" />
+                      {label}
+                    </a>
                   </Link>
                 </li>
               );
             })}
             <li className="py-1">
-              <a onClick={onSignOut}>Cerrar Sesión</a>
+              <a onClick={onSignOut}>
+                <Icon kind="outline" icon="LogoutIcon" className="w-4 h-4" />
+                Cerrar Sesión
+              </a>
             </li>
           </ul>
         </div>

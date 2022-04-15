@@ -42,16 +42,17 @@ const Recipes: NextPage = () => {
         <div className="max-w-sm px-5 mx-auto md:flex md:items-center md:space-x-5">
           <Input
             name="search"
-            type="text"
+            type="search"
             placeholder="Introduce una receta"
-            icon
-            iconName="SearchIcon"
-            iconKind="solid"
+            icon={{
+              name: "SearchIcon",
+              kind: "outline",
+            }}
           />
 
-          <div className="mb-3">
-            <Button type="submit" label="Buscar" fullWidth />
-          </div>
+          <button className="btn btn-primary normal-case" type="submit">
+            Buscar
+          </button>
         </div>
       </Form>
       <GreyContainer>

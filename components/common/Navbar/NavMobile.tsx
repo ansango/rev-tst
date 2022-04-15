@@ -16,12 +16,15 @@ const NavMobile: FC = () => {
         tabIndex={0}
         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
       >
-        {routes.map(({ label, path }) => {
+        {routes.map(({ label, path, icon }) => {
           const cn = routeActive(pathname, path) ? "bg-primary text-white" : "";
           return (
             <li key={path}>
               <Link href={path}>
-                <a className={cn}>{label}</a>
+                <a className={cn}>
+                  <Icon icon={icon} kind="outline" className="w-4 h-4"/>
+                  {label}
+                </a>
               </Link>
             </li>
           );

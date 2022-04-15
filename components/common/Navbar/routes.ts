@@ -9,18 +9,22 @@ const routes: Props[] = [
   {
     path: "/recipes",
     label: "Recetas",
+    icon: "BookOpenIcon",
   },
   {
     path: "/categories",
     label: "Categorías",
+    icon: "ColorSwatchIcon",
   },
   {
     path: "/trending",
     label: "Tendencias",
+    icon: "SparklesIcon",
   },
   {
     path: "/robousers",
     label: "Robousers",
+    icon: "UserGroupIcon",
   },
 ];
 
