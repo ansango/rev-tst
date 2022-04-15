@@ -3,9 +3,8 @@
  */
 
 import { FC } from "react";
-// import * as cn from "./CheckboxStyles";
 import { RegisterOptions, useFormContext } from "react-hook-form";
-import CheckboxProps from "./CheckboxProps";
+
 
 enum inputSize {
   xs = "checkbox-xs",

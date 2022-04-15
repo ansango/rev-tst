@@ -3,15 +3,15 @@
  */
 
 import { FC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { FormProps } from ".";
-// import * as cn from "./FormStyles";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
-/**
- * Description of Form component displayed in Storybook
- */
+type Props = {
+  defaultValues?: any;
+  onSubmit: SubmitHandler<any>;
+  className?: string;
+};
 
-const Form: FC<FormProps> = ({ defaultValues, children, onSubmit, className }) => {
+const Form: FC<Props> = ({ defaultValues, children, onSubmit, className }) => {
   const methods = useForm({ defaultValues });
   return (
     <FormProvider {...methods}>
