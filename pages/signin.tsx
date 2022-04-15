@@ -2,7 +2,7 @@ import { selectUser, signIn } from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
-import { Form, Input, RadioGroup } from "components/common/Forms";
+import { Form, Input, RadioGroup, Select } from "components/common/Forms";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -57,6 +57,7 @@ const SignIn: NextPage = () => {
               </Link>
             </p>
             <Button label="Iniciar sesión" fullWidth type="submit" />
+
             <p className="text-sm font-medium text-gray-500">
               ¿No tienes cuenta?
               <Link href="/signup">

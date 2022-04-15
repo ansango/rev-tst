@@ -4,6 +4,7 @@ import * as HeroIcons from "@heroicons/react/solid";
 import { Icon } from "../Icons";
 import Error from "./Error";
 import Label from "./Label";
+import Switch from "./Switch";
 
 type InputProps = {
   size?: "xs" | "sm" | "md" | "lg";

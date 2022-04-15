@@ -42,7 +42,7 @@ const RadioGroup: FC<Props> = ({
     formState: { errors },
   } = useFormContext();
   return (
-    <fieldset id={name} className="mb-3">
+    <fieldset id={name} className="form-control w-full">
       {label && (
         <label htmlFor={name} className="label cursor-pointer">
           <span

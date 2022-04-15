@@ -3,48 +3,55 @@
  */
 
 import { FC, useState } from "react";
-// import * as cn from "./SwitchStyles";
-import { useFormContext } from "react-hook-form";
-import { SwitchProps } from ".";
+import { RegisterOptions, useFormContext } from "react-hook-form";
 
-/**
- * Description of Switch component displayed in Storybook
- */
+type SwitchProps = {
+  size?: "xs" | "sm" | "md" | "lg";
+  kind?: "default" | "primary" | "secondary" | "accent";
+  label?: string;
+  name: string;
+  options?: RegisterOptions;
+  register?: any;
+};
 
-const Switch: FC<SwitchProps> = ({ label, name, options, ...rest }) => {
+enum inputSize {
+  xs = "toggle-xs",
+  sm = "toggle-sm",
+  md = "toggle-md",
+  lg = "toggle-lg",
+}
+
+enum inputKind {
+  default = "",
+  primary = "toggle-primary",
+  secondary = "toggle-secondary",
+  accent = "toggle-accent",
+}
+
+const Switch: FC<SwitchProps> = ({
+  label,
+  name,
+  options,
+  size = "md",
+  kind = "default",
+  ...rest
+}) => {
   const { register } = useFormContext();
   const [isActive, setIsActive] = useState(false);
   return (
-    <label
-      className="flex relative items-center mb-4 cursor-pointer"
-      htmlFor={name}
-      onClick={() => setIsActive(!isActive)}
-    >
-      <span className="relative flex items-center">
-        <span
-          className={
-            isActive
-              ? "absolute w-5 h-5 bg-white px-2 rounded-full right-0.5 transition shadow-sm"
-              : "absolute w-5 h-5 bg-white px-2 rounded-full left-0.5 transition shadow-sm"
-          }
-        ></span>
-        <div
-          className={
-            isActive
-              ? "focus:ring-0 w-11 h-6 bg-blue-600 rounded-full border border-gray-200"
-              : "focus:ring-0 w-11 h-6 bg-gray-200 rounded-full border border-gray-200"
-          }
-        />
+    <div className="form-control w-full">
+      <label className="label cursor-pointer">
+        <span className="label-text">Remember me</span>
         <input
           type="checkbox"
+          className={`toggle ${inputSize[size]} ${inputKind[kind]}`}
           checked={isActive}
-          className="sr-only"
+          onClick={() => setIsActive(!isActive)}
           {...register(name, { ...options })}
           {...rest}
         />
-      </span>
-      <span className="ml-3 text-sm font-medium text-gray-900">{label}</span>
-    </label>
+      </label>
+    </div>
   );
 };
 

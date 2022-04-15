@@ -3,7 +3,7 @@ import Input from "./Input";
 import Checkbox from "./Checkbox";
 import File from "./File/File";
 import RadioGroup from "./RadioGroup";
-import Select from "./Select/Select";
+import Select from "./Select";
 import Switch from "./Switch/Switch";
 import Date from "./Date";
 import TextArea from "./TextArea";
