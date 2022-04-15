@@ -9,7 +9,7 @@ type Props = {
 
 const Label: FC<Props> = ({ name, label, errors }) => {
   return (
-    <label htmlFor={name} className="label-text">
+    <label htmlFor={name} className="label">
       <span
         className={!errors[name] ? "label-text" : "label-text text-red-700"}
       >

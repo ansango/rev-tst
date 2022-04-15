@@ -3,7 +3,7 @@ import { selectUser, signUp } from "@/lib-client/store/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Button from "components/common/Button/Button/Button";
 import GreyContainer from "components/common/Container/GreyContainer";
-import { Form, Input } from "components/common/Forms";
+import { Checkbox, Form, Input } from "components/common/Forms";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";

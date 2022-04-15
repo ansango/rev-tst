@@ -19,20 +19,20 @@ type Props = {
 };
 
 enum inputSize {
-  xs = "input-xs",
-  sm = "input-sm",
-  md = "input-md",
-  lg = "input-lg",
+  xs = "h-18",
+  sm = "h-20",
+  md = "h-24",
+  lg = "h-28",
 }
 
 enum inputKind {
   default = "",
-  primary = "input-primary",
-  secondary = "input-secondary",
-  accent = "input-accent",
-  info = "input-info",
-  warning = "input-warning",
-  error = "input-error",
+  primary = "textarea-primary",
+  secondary = "textarea-secondary",
+  accent = "textarea-accent",
+  info = "textarea-info",
+  warning = "textarea-warning",
+  error = "textarea-error",
 }
 
 const TextArea: FC<Props> = ({
@@ -57,8 +57,8 @@ const TextArea: FC<Props> = ({
         rows={rows}
         className={
           !errors[name]
-            ? `textarea textarea-bordered w-full h-24 ${inputSize[size]} ${inputKind[kind]}`
-            : `textarea textarea-bordered w-full h-24 ${inputSize[size]} input-error`
+            ? `textarea textarea-bordered w-full ${inputSize[size]} ${inputKind[kind]}`
+            : `textarea textarea-bordered w-full ${inputSize[size]} textarea-error`
         }
         {...register(name, { ...options })}
         {...rest}
