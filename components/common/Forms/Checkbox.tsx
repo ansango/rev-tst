@@ -1,10 +1,5 @@
-/**
- * ?Checkbox Component
- */
-
 import { FC } from "react";
 import { RegisterOptions, useFormContext } from "react-hook-form";
-
 
 enum inputSize {
   xs = "checkbox-xs",
@@ -15,9 +10,9 @@ enum inputSize {
 
 enum inputKind {
   default = "",
-  primary = "input-primary",
-  secondary = "input-secondary",
-  accent = "input-accent",
+  primary = "checkbox-primary",
+  secondary = "checkbox-secondary",
+  accent = "checkbox-accent",
 }
 
 type Props = {
@@ -50,11 +45,11 @@ const Checkbox: FC<Props> = ({
           className={
             !errors[name]
               ? "label cursor-pointer"
-              : "label cursor-pointer text-red-700"
+              : "label cursor-pointer text-red-600"
           }
         >
           <span
-            className={!errors[name] ? "label-text" : "label-text text-red-700"}
+            className={!errors[name] ? "label-text" : "label-text text-red-600"}
           >
             {label}
           </span>

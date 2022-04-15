@@ -11,7 +11,7 @@ const Label: FC<Props> = ({ name, label, errors }) => {
   return (
     <label htmlFor={name} className="label">
       <span
-        className={!errors[name] ? "label-text" : "label-text text-red-700"}
+        className={!errors[name] ? "label-text" : "label-text text-red-600"}
       >
         {label}
       </span>

@@ -1,7 +1,3 @@
-/**
- * ?Date Component
- */
-
 import { FC } from "react";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import Error from "./Error";

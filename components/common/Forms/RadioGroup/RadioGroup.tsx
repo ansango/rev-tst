@@ -1,21 +1,40 @@
-/**
- * ?Radio Component
- */
-
 import { FC } from "react";
-// import * as cn from "./RadioStyles";
-import { useFormContext } from "react-hook-form";
-import RadioPropsGroup from "./RadioGroupProps";
+import { RegisterOptions, useFormContext } from "react-hook-form";
+import Error from "../Error";
 
-/**
- * Description of Radio component displayed in Storybook
- */
+type Props = {
+  label?: string;
+  name: string;
+  size?: "xs" | "sm" | "md" | "lg";
+  kind?: "default" | "primary" | "secondary" | "accent";
+  data: {
+    lab: string;
+    value: string;
+  }[];
+  options?: RegisterOptions;
+};
 
-const RadioGroup: FC<RadioPropsGroup> = ({
+enum inputSize {
+  xs = "radio-xs",
+  sm = "radio-sm",
+  md = "radio-md",
+  lg = "radio-lg",
+}
+
+enum inputKind {
+  default = "",
+  primary = "radio-primary",
+  secondary = "radio-secondary",
+  accent = "radio-accent",
+}
+
+const RadioGroup: FC<Props> = ({
   label,
   name,
   data,
   options,
+  kind = "default",
+  size = "md",
   ...rest
 }) => {
   const {
@@ -25,45 +44,41 @@ const RadioGroup: FC<RadioPropsGroup> = ({
   return (
     <fieldset id={name} className="mb-3">
       {label && (
-        <label
-          htmlFor={name}
-          className={
-            !errors[name]
-              ? "block mb-2 text-sm font-medium text-gray-900"
-              : "block mb-2 text-sm font-medium text-red-700"
-          }
-        >
-          {label}
+        <label htmlFor={name} className="label cursor-pointer">
+          <span
+            className={
+              !errors[name] ? "label-text" : "label-text  text-red-600"
+            }
+          >
+            {label}
+          </span>
         </label>
       )}
       {data.map(({ value, lab }, index) => (
-        <div className="flex items-center mb-4" key={index}>
-          <input
-            type="radio"
-            value={value}
-            className={
-              !errors[name]
-                ? "w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-                : "w-4 h-4 border-red-300 focus:ring-2 focus:ring-red-300"
-            }
-            {...register(name, { ...options })}
-            {...rest}
-          />
-          <label
-            htmlFor={value}
-            className={
-              !errors[name]
-                ? "ml-2 text-sm font-medium text-gray-900"
-                : "ml-2 text-sm font-medium text-red-700"
-            }
-          >
-            {lab}
+        <div className="form-control" key={index}>
+          <label htmlFor={value} className="label cursor-pointer">
+            <span
+              className={
+                !errors[name] ? "label-text" : "label-text  text-red-600"
+              }
+            >
+              {lab}
+            </span>
+            <input
+              type="radio"
+              value={value}
+              className={
+                !errors[name]
+                  ? `radio ${inputSize[size]} ${inputKind[kind]}`
+                  : `radio ${inputSize[size]} checked:bg-red-600 border-red-600`
+              }
+              {...register(name, { ...options })}
+              {...rest}
+            />
           </label>
         </div>
       ))}
-      {errors[name] && (
-        <p className="mt-2 text-sm text-red-600">{errors[name].message}</p>
-      )}
+      <Error errors={errors} name={name} {...rest} />
     </fieldset>
   );
 };
