@@ -1,44 +1,9 @@
 import { FC } from "react";
-import {
-  FieldErrors,
-  useFormContext,
-  type RegisterOptions,
-} from "react-hook-form";
+import { useFormContext, type RegisterOptions } from "react-hook-form";
 import * as HeroIcons from "@heroicons/react/solid";
 import { Icon } from "../Icons";
-
-type LProps = {
-  errors: FieldErrors<Record<string, any>>;
-  name: string;
-  label: string;
-};
-
-const Label: FC<LProps> = ({ name, label, errors }) => {
-  return (
-    <label htmlFor={name} className="label-text">
-      <span
-        className={!errors[name] ? "label-text" : "label-text text-red-700"}
-      >
-        {label}
-      </span>
-    </label>
-  );
-};
-
-type EProps = {
-  errors: FieldErrors<Record<string, any>>;
-  name: string;
-};
-
-const Error: FC<EProps> = ({ errors, name }) => {
-  return (
-    <>
-      {errors[name] && (
-        <p className="mt-1 label-text text-red-700">{errors[name].message}</p>
-      )}
-    </>
-  );
-};
+import Error from "./Error";
+import Label from "./Label";
 
 type InputProps = {
   size?: "xs" | "sm" | "md" | "lg";
@@ -91,7 +56,7 @@ const Input: FC<Props> = ({
   } = useFormContext();
 
   return (
-    <div className="form-control w-full max-w-xs">
+    <div className="form-control w-full">
       {!icon ? (
         <>
           {label && <Label name={name} label={label} errors={errors} />}
@@ -99,8 +64,8 @@ const Input: FC<Props> = ({
             type={type}
             className={
               !errors[name]
-                ? `input w-full max-w-xs input-bordered ${inputSize[size]} ${inputKind[kind]}`
-                : `input w-full max-w-xs input-bordered ${inputSize[size]} input-error`
+                ? `input w-full input-bordered ${inputSize[size]} ${inputKind[kind]}`
+                : `input w-full input-bordered ${inputSize[size]} input-error`
             }
             {...register(name, { ...options })}
             {...rest}
@@ -122,8 +87,8 @@ const Input: FC<Props> = ({
               type={type}
               className={
                 !errors[name]
-                  ? `pl-10 input w-full max-w-xs input-bordered ${inputSize[size]} ${inputKind[kind]}`
-                  : `pl-10 input w-full max-w-xs input-bordered ${inputSize[size]} input-error`
+                  ? `pl-10 input w-full input-bordered ${inputSize[size]} ${inputKind[kind]}`
+                  : `pl-10 input w-full input-bordered ${inputSize[size]} input-error`
               }
               {...register(name, { ...options })}
               {...rest}

@@ -5,8 +5,8 @@ import File from "./File/File";
 import RadioGroup from "./RadioGroup/RadioGroup";
 import Select from "./Select/Select";
 import Switch from "./Switch/Switch";
-import Date from "./Date/Date";
-import TextArea from "./TextArea/TextArea";
+import Date from "./Date";
+import TextArea from "./TextArea";
 export {
   Form,
   Input,
