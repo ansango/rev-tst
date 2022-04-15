@@ -32,9 +32,9 @@ const Alert: FC<AlertProps> = ({
       role="alert"
       data-testid="alert"
     >
-      {withIcon && icon && (
+      {/* {withIcon && icon && (
         <Icon icon={icon} classIcon={cn.iconAlert} kind="solid" />
-      )}
+      )} */}
       <div className={`${cn.textBase} ${cn.textKind[kind]}`}>
         {text}
         <span
