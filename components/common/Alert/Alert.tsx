@@ -3,7 +3,7 @@
  */
 
 import { FC, useState } from "react";
-import ButtonIcon from "../Button/ButtonIcon/ButtonIcon";
+// import ButtonIcon from "../Button/ButtonIcon/ButtonIcon";
 import Icon from "../Icons/Icon";
 import AlertProps from "./AlertProps";
 
@@ -44,7 +44,7 @@ const Alert: FC<AlertProps> = ({
           {link?.text}
         </span>
       </div>
-      {dismissable && (
+      {/* {dismissable && (
         <ButtonIcon
           icon="XIcon"
           classButton={`${cn.btnCloseBase} ${cn.btnCloseKind[kind]}`}
@@ -52,7 +52,7 @@ const Alert: FC<AlertProps> = ({
           action={() => setIsOpen(false)}
           data-testid="dismiss-button"
         />
-      )}
+      )} */}
     </div>
   );
 };
