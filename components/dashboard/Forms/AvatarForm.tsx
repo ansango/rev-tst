@@ -3,7 +3,6 @@ import {
   updateAvatar,
 } from "@/lib-client/store/features/account/accountSlice";
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
-
 import { useAppDispatch, useAppSelector } from "@/lib-client/store/hooks";
 import Avatar from "components/common/Avatar/Avatar";
 import Button from "components/common/Button/Button/Button";
@@ -27,14 +26,19 @@ const AvatarForm = () => {
     },
     [dispatch]
   );
+
   return (
     <Form onSubmit={onSubmit}>
-      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 space-y-5">
-        <div className="grid grid-cols-12 gap-5">
-          <div className="col-span-3">
-            <Avatar size="md" imgUrl={account?.avatar} />
+      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 space-y-5 flex">
+        <div className="flex space-x-10">
+          <div className="my-auto">
+            <div className="inline-flex flex-shrink ml-1">
+              <div className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 flex">
+                <Avatar size="md" imgUrl={account?.avatar} />
+              </div>
+            </div>
           </div>
-          <div className="col-span-9">
+          <div className="">
             {account?.firstName && (
               <h5 className="text-xl font-medium text-gray-900">
                 {account.firstName} {account?.lastName}
@@ -48,13 +52,7 @@ const AvatarForm = () => {
             {account?.firstName && (
               <h4 className="text-gray-600">@{user?.username}</h4>
             )}
-          </div>
-        </div>
-        <div className="">
-          <div className="col-span-6">
             <File name="file" />
-          </div>
-          <div>
             <Button label="Guardar" type="submit" />
           </div>
         </div>

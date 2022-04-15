@@ -16,6 +16,9 @@ const Footer: FC = () => {
             La comunidad que te permite crear y compartir recetas para tu robot
             de cocina favorito. Cocina, comparte y disfruta!
           </p>
+          <div className="flex space-x-5">
+            <SocialIcons />
+          </div>
         </div>
         <div>
           <span className="footer-title">Robocooker</span>

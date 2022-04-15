@@ -70,9 +70,7 @@ const DataAccountForm: FC = () => {
   return (
     <Form onSubmit={onSubmit}>
       <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm sm:p-6 lg:p-8">
-        <h5 className="text-xl font-medium text-gray-900">
-          Información
-        </h5>
+        <h5 className="text-xl font-medium text-gray-900">Información</h5>
         <div className="space-y-5 md:space-y-0 md:grid md:gap-5 md:grid-cols-2">
           <Input
             type="text"

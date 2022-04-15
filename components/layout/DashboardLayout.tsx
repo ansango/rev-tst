@@ -1,30 +1,84 @@
 import { selectUser } from "@/lib-client/store/features/user/userSlice";
 import { useAppSelector } from "@/lib-client/store/hooks";
 import Footer from "components/dashboard/Footer/Footer";
-import Navbar from "components/common/Navbar/Navbar";
-import Sidebar from "components/dashboard/Sidebar/Sidebar";
+import Navbar from "components/dashboard/Navbar";
 import { useRouter } from "next/router";
 import React, { FC, useEffect } from "react";
-import Motion from "./Motion";
+import { motion } from "framer-motion";
+
+import { routeActive } from "@/lib-utils/router";
+import Link from "next/link";
+import Brand from "components/common/Navbar/Brand";
+import { routes, routesDashboard } from "components/common/Navbar/routes";
 
 const DashboardLayout: FC = ({ children }) => {
   const user = useAppSelector(selectUser);
-  const { replace, route } = useRouter();
+  const { replace, route, pathname } = useRouter();
   useEffect(() => {
     if (!user) replace("/signin");
   }, [user, replace]);
   if (!user) return null;
   return (
     <div className="bg-gray-100">
-      <Navbar />
-      <div className="grid grid-cols-12 gap-5 h-[93.6vh]">
-        <Sidebar />
+      <div className="drawer drawer-mobile">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-        <div className="col-span-full lg:col-span-9 xl:col-span-10 space-y-5 py-5 px-5 lg:pl-0 flex flex-col justify-between">
-          <Motion route={route}>
-            <main>{children}</main>
-          </Motion>
-          <Footer />
+        <div className="drawer-content flex flex-col items-center justify-center relative">
+          <Navbar />
+          <motion.main
+            key={route}
+            initial="initial"
+            animate="animate"
+            variants={{
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+            }}
+            transition={{ delay: 0.5 }}
+            className="w-full h-full relative"
+          >
+            <div className="absolute w-full h-full">{children}</div>
+          </motion.main>
+        </div>
+
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+            <Brand />
+            <div className="flex flex-col w-full">
+              <div tabIndex={0} className="collapse collapse-arrow bg-base-100">
+                <div className="collapse-title text-md font-medium">
+                  Navegación
+                </div>
+                <div className="collapse-content">
+                  {routes.map(({ label, path }) => {
+                    const cn = routeActive(pathname, path)
+                      ? "bg-primary text-white"
+                      : "";
+                    return (
+                      <li key={path}>
+                        <Link href={path}>
+                          <a className={cn}>{label}</a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="divider my-3"></div>
+              {routesDashboard.map(({ label, path }) => {
+                const cn = routeActive(pathname, path)
+                  ? "bg-primary text-white"
+                  : "";
+                return (
+                  <li key={path}>
+                    <Link href={path}>
+                      <a className={cn}>{label}</a>
+                    </Link>
+                  </li>
+                );
+              })}
+            </div>
+          </ul>
         </div>
       </div>
     </div>

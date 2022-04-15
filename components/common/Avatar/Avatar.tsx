@@ -17,10 +17,9 @@ type AvatarProps = {
   imgUrl?: string | null;
 };
 
-const Avatar: FC<AvatarProps> = ({ size }) => {
-  const account = useAppSelector(selectAccount);
+const Avatar: FC<AvatarProps> = ({ size, imgUrl }) => {
   const user = useAppSelector(selectUser);
-  const avatar = account?.avatar;
+  const avatar = imgUrl;
   const username = user?.username;
 
   return avatar ? (

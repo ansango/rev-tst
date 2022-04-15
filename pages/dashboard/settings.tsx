@@ -15,7 +15,7 @@ const Settings: NextPage = () => {
   const dispatch = useAppDispatch();
   const onVerify = () => dispatch(verifyEmail());
   return (
-    <div>
+    <>
       <Alert
         text="Parece que todavía no has verificado tu email"
         opened={!user?.emailVerified}
@@ -25,24 +25,23 @@ const Settings: NextPage = () => {
         link={{ action: onVerify, text: "Verificar email" }}
       />
 
-      <div className="grid gap-5">
-        <div className="grid lg:grid-cols-12 md:space-y-0 gap-5">
-          <div className="col-span-full xl:col-span-5">
-            <div className="gap-5 grid grid-cols-12">
-              <div className="col-span-full md:col-span-6 lg:col-span-6 xl:col-span-full">
-                <AvatarForm />
-              </div>
-              <div className="col-span-full md:col-span-6 lg:col-span-6 xl:col-span-full">
-                <ResetPasswordForm />
-              </div>
+      <main className="grid lg:grid-cols-12 md:space-y-0 gap-5 h-full p-5">
+        <div className="col-span-full xl:col-span-5">
+          <div className="gap-5 grid grid-cols-12">
+            <div className="col-span-full md:col-span-6 lg:col-span-6 xl:col-span-full">
+              <AvatarForm />
+            </div>
+            <div className="col-span-full md:col-span-6 lg:col-span-6 xl:col-span-full">
+              <ResetPasswordForm />
             </div>
           </div>
-          <div className="col-span-full xl:col-span-7">
-            <DataAccountForm />
-          </div>
         </div>
-      </div>
-    </div>
+        <div className="col-span-full xl:col-span-7">
+          <DataAccountForm />
+        </div>
+        <div className="py-10"></div>
+      </main>
+    </>
   );
 };
 

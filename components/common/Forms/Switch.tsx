@@ -1,11 +1,7 @@
-/**
- * ?Switch Component
- */
-
 import { FC, useState } from "react";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 
-type SwitchProps = {
+type Props = {
   size?: "xs" | "sm" | "md" | "lg";
   kind?: "default" | "primary" | "secondary" | "accent";
   label?: string;
@@ -28,7 +24,7 @@ enum inputKind {
   accent = "toggle-accent",
 }
 
-const Switch: FC<SwitchProps> = ({
+const Switch: FC<Props> = ({
   label,
   name,
   options,
